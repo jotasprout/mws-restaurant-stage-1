@@ -33,10 +33,26 @@
     </section>
   </main>
 
+  <script>
+    navigator.serviceWorker.register('sw.js', {
+      scope: './'
+    });
+  </script>
+  <!--
+    <script src="js/start-sw.js"></script>
+    Above was external file because I was scared of plagiarism accusation but it wouldn't work.
+  -->
+
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>
+  <script src="js/sw-logging.js"></script>
 
+  <!--
+    Why are the scripts before the footer? 
+    Everything I've read says make them last thing before closing body tag. 
+    Ask and look up.
+  -->
 
   <footer id="footer">
     Copyright (c) 2018 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
