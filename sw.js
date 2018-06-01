@@ -4,10 +4,12 @@ self.addEventListener('install', function(event) {
         caches.open('restaurant').then(function(cache) {
             return cache.addAll([
                 './',
-                'js/',
-                // How come it only makes the folders but doesn't store their contents?
+                'index.html',
+                'js/dbhelper.js',
+                'js/main.js',
+                'js/restaurant_info.js',
                 'img/',
-                // 'restaurant.html',
+                'restaurant.html',
                 'CSS/styles.css',
                 'data/restaurants.json'
             ]);
