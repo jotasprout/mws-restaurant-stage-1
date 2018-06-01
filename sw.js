@@ -15,13 +15,3 @@ self.addEventListener('install', function(event) {
         })
     )
 });
-
-// Uses the cache (first?) to build the page
-// regardless of online status?
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
-        caches.match(event.request).then(function(response) {
-            return response || fetch.request);
-        })
-    );
-});
