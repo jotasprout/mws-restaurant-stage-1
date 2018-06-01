@@ -1,4 +1,3 @@
-// Installs the service worker and stores stuff in the cache
 self.addEventListener('install', function(event) {
     event.waitUntil(
         // stores stuff in the cache
