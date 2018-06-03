@@ -128,7 +128,6 @@ nav h1 a {
   padding: 0 10px;
   width: 200px;
 }
-
 /* ====================== Restaurant Listing ====================== */
 #restaurants-list {
   background-color: #f3f3f3;
@@ -156,7 +155,6 @@ nav h1 a {
   display: inline-block;
   width: 50%; 
   */
-  
 }
 #restaurants-list .restaurant-img {
   background-color: #ccc;
