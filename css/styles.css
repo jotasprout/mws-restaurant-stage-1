@@ -242,7 +242,8 @@ nav h1 a {
   line-height: 1.1;
 }
 #restaurant-img {
-	width: 90%;
+  width: 90%;
+  border-radius: 18% 0%;  
 }
 #restaurant-address {
   font-size: 12pt;
@@ -293,7 +294,11 @@ nav h1 a {
 }
 #reviews-list li p {
   margin: 0 0 10px;
+  background-color: #f00;
 }
 #restaurant-hours td {
   color: #666;
+}
+#review-name {
+  border-radius: 25% 0% 0% 0%;
 }
