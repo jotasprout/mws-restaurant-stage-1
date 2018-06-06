@@ -3,13 +3,22 @@
 
 <head>
   <meta charset="utf-8">
+
+  <meta name='viewport' content='user-scalable=no, width=device-width, initial-scale=1' />
+  <meta name='apple-mobile-web-app-capable' content='yes'>
+  <meta name='mobile-web-app-capable' content='yes'> 
+    
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <link rel="stylesheet" href="css/styles.css">
   <title>Restaurant Reviews</title>
 </head>
 
 <body>
-  <a href="#maincontent" class="skip-link">Skip to main content</a>
+  <!--
+    Will non-sighted users hear "Restaurant Reviews" before they press tab?
+  -->
+
+  <a href="#maincontent" tabindex="0" class="skip-link">Skip to main content</a>
   <header>
     <nav>
       <h1><a href="/">Restaurant Reviews</a></h1>
@@ -20,7 +29,7 @@
     <section id="map-container">
       <div id="map"></div>
     </section>
-    <section id="maincontent">
+    <section tabindex="0" id="maincontent">
       <div class="filter-options">
         <h2>Filter Results</h2>
         <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">

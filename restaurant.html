@@ -3,14 +3,20 @@
 
 <head>
   <meta charset="utf-8">
+
+  <meta name='viewport' content='user-scalable=no, width=device-width, initial-scale=1' />
+  <meta name='apple-mobile-web-app-capable' content='yes'>
+  <meta name='mobile-web-app-capable' content='yes'> 
+
   <!-- Normalize.css for better cross-browser consistency -->
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <!-- Main CSS file -->
-  <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="stylesheet" href="css/styles.css" media = "screen and (min-width:900px)" type="text/css">
   <title>Restaurant Info</title>
 </head>
 
 <body class="inside">
+    <a href="#maincontent" tabindex="0" class="skip-link">Skip to main content</a>
   <!-- Beginning header -->
   <header>
     <!-- Beginning nav -->
@@ -18,10 +24,11 @@
       <h1><a href="/">Restaurant Reviews</a></h1>
     </nav>
     <!-- Beginning breadcrumb -->
+
     <!-- There is no reason anyone sighted or not would need or use this
-    <ul id="breadcrumb" >
-      <li><a href="/">Home</a></li>
-    </ul>
+      <ul id="breadcrumb" >
+        <li><a href="/">Home</a></li>
+      </ul>
     -->
 
     <!-- End breadcrumb -->
