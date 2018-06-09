@@ -33,20 +33,28 @@
     <section id="map-container">
       <div id="map"></div>
     </section>
-    <section tabindex="1" id="maincontent">
+    <section id="maincontent">
       <div class="filter-options">
 <!--
+  <h2>Filter Results</h2>
   <label for="neighborhoods-select"></label>
 -->
-        <h2>Filter Results</h2>
-        <select id="neighborhoods-select" tabindex="2" name="neighborhoods" role="combobox" onchange="updateRestaurants()">
-          <option value="all">All Neighborhoods</option>
-        </select>
-        <select id="cuisines-select" tabindex="3" name="cuisines" role="combobox" onchange="updateRestaurants()">
-          <option value="all">All Cuisines</option>
-        </select>
+        <label><h2>Filter by Neighborhood</h2>
+          <select id="neighborhoods-select" name="neighborhoods" role="combobox" onchange="updateRestaurants()">
+            <option value="all">All Neighborhoods</option>
+          </select>
+        </label>
+
+        <lable><h2>Filter by Cuisine</h2>
+          <select id="cuisines-select" name="cuisines" role="combobox" onchange="updateRestaurants()">
+            <option value="all">All Cuisines</option>
+          </select>
+        </lable>
+
       </div>
+
       <ul id="restaurants-list"></ul>
+
     </section>
   </main>
 
