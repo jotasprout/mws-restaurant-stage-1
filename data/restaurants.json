@@ -4,7 +4,7 @@
     "name": "Mission Chinese Food",
     "neighborhood": "Manhattan",
     "photograph": "1.jpg",
-    "photodesc": "Several families sitting around tables and in booths of a nice restaurant.",
+    "photodesc": "Nice restaurant decorated with mirrors on brick walls. Several families sitting around tables beneath candle chandeliers. Other families and couples sitting in booths beneath tiered chandeliers.",
     "address": "171 E Broadway, New York, NY 10002",
     "latlng": {
       "lat": 40.713829,
@@ -44,7 +44,7 @@
     "name": "Emily",
     "neighborhood": "Brooklyn",
     "photograph": "2.jpg",
-    "photodesc": "Slightly burnt cheese pizza cut into six slices.",
+    "photodesc": "Cheese pizza with globs of mozzarella and burnt crust cut into six slices on a pizza tray on a wooden table.",
     "address": "919 Fulton St, Brooklyn, NY 11238",
     "latlng": {
       "lat": 40.683555,
@@ -84,7 +84,7 @@
     "name": "Kang Ho Dong Baekjeong",
     "neighborhood": "Manhattan",
     "photograph": "3.jpg",
-    "photodesc": "Clean, empty kitchen with wooden tables and chairs.",
+    "photodesc": "Large, clean, open, empty industrial kitchen with rectangle and round wooden tables and chairs.",
     "address": "1 E 32nd St, New York, NY 10016",
     "latlng": {
       "lat": 40.747143,
@@ -124,7 +124,7 @@
     "name": "Katz's Delicatessen",
     "neighborhood": "Manhattan",
     "photograph": "4.jpg",
-    "photodesc": "Exterior of corner delicatessan at night.",
+    "photodesc": "Exterior of corner delicatessan at night. Two signs saying Katz's one painted one neon. Pedestrians wearing coats for cold weather.",
     "address": "205 E Houston St, New York, NY 10002",
     "latlng": {
       "lat": 40.722216,
@@ -164,7 +164,7 @@
     "name": "Roberta's Pizza",
     "neighborhood": "Brooklyn",
     "photograph": "5.jpg",
-    "photodesc": "Interior of crowded pizzaria with happy employees.",
+    "photodesc": "Interior of crowded pizzaria with happy employees and young customers. Decorated in industrial style with Christmas lights.",
     "address": "261 Moore St, Brooklyn, NY 11206",
     "latlng": {
       "lat": 40.705089,
@@ -204,7 +204,7 @@
     "name": "Hometown BBQ",
     "neighborhood": "Brooklyn",
     "photograph": "6.jpg",
-    "photodesc": "Crowded restaurant with rustic, industrial decor.",
+    "photodesc": "Crowded restaurant with rustic, industrial decor. Long line of customers waiting to order. Some empty tables and chairs.",
     "address": "454 Van Brunt St, Brooklyn, NY 11231",
     "latlng": {
       "lat": 40.674925,
@@ -244,7 +244,7 @@
     "name": "Superiority Burger",
     "neighborhood": "Manhattan",
     "photograph": "7.jpg",
-    "photodesc": "Black and white photo of hipster burger joint with a long line.",
+    "photodesc": "Black and white photo of hipster burger joint with lots of people waiting inside. Aging, hippy same-sex couple walking their dog outside.",
     "address": "430 E 9th St, New York, NY 10009",
     "latlng": {
       "lat": 40.727397,
@@ -284,7 +284,7 @@
     "name": "The Dutch",
     "neighborhood": "Manhattan",
     "photograph": "8.jpg",
-    "photodesc": "Restaurant sign with the words The Dutch.",
+    "photodesc": "Restaurant sign with the words The Dutch on a brick building. Tree outside with white flowers.",
     "address": "131 Sullivan St, New York, NY 10012",
     "latlng": {
       "lat": 40.726584,
@@ -324,7 +324,7 @@
     "name": "Mu Ramen",
     "neighborhood": "Queens",
     "photograph": "9.jpg",
-    "photodesc": "Black and white photo of young customers dining at group tables.",
+    "photodesc": "Black and white photo of young customers dining quietly at group tables.",
     "address": "1209 Jackson Ave, Queens, NY 11101",
     "latlng": {
       "lat": 40.743797,
@@ -364,7 +364,7 @@
     "name": "Casa Enrique",
     "neighborhood": "Queens",
     "photograph": "10.jpg",
-    "photodesc": "Interior of empty upscale restaurant with stainless steel counter.",
+    "photodesc": "Interior of empty upscale restaurant. Foreground is stainless steel counter with red candles and white stools. Rest of restaurant has plastic white tables and chairs. Mix of gentrified industrial and country decor.",
     "address": "5-48 49th Ave, Queens, NY 11101",
     "latlng": {
       "lat": 40.743394,
