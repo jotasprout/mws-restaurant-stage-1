@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <meta name='viewport' content='user-scalable=no, width=device-width, initial-scale=1' />
+  <meta name='viewport' content='user-scalable=yes, width=device-width, initial-scale=1' />
   <meta name='apple-mobile-web-app-capable' content='yes'>
   <meta name='mobile-web-app-capable' content='yes'> 
 
@@ -50,19 +50,24 @@
     <!-- End map -->
     <div id="maincontent">
       <!-- Beginning restaurant -->
-      <section id="restaurant-container">
-        <h1 id="restaurant-name"></h1>
+      <section id="restaurant-container" class="restaurant-container">
         <img id="restaurant-img">
-        <p id="restaurant-cuisine"></p>
-        <p id="restaurant-address"></p>
-        <table id="restaurant-hours"></table>
+        <div class="restaurant-info">
+            <h2 id="restaurant-name"></h2>
+            <!-- Beginning restaurant -->
+            <p id="restaurant-cuisine"></p>
+            <p id="restaurant-address"></p>
+            <table id="restaurant-hours"></table>
+                  <!-- Beginning reviews -->
+            <div id="reviews-container">
+              <ul id="reviews-list"></ul>
+            </div>
+            <!-- End reviews -->
+        </div>
+
       </section>
       <!-- end restaurant -->
-      <!-- Beginning reviews -->
-      <section id="reviews-container">
-        <ul id="reviews-list"></ul>
-      </section>
-      <!-- End reviews -->
+
     </div>
 
   </main>

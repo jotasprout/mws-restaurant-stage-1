@@ -14,6 +14,9 @@ window.initMap = () => {
         center: restaurant.latlng,
         scrollwheel: false
       });
+      google.maps.event.addListenerOnce(self.map, 'idle', () => {
+        document.getElementsByTagName('iframe')[0].title = "Google Maps";
+      });
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
@@ -96,7 +99,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  */
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
-  const title = document.createElement('h2');
+  const title = document.createElement('h3');
   title.innerHTML = 'Reviews';
   container.appendChild(title);
 
@@ -118,21 +121,28 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
-  const name = document.createElement('p');
+
+  const reviewtop = document.createElement('div');
+  reviewtop.className = 'review-top';
+  li.appendChild(reviewtop);
+
+  const name = document.createElement('div');
   name.className = 'review-name';
   name.innerHTML = review.name;
-  li.appendChild(name);
+  reviewtop.appendChild(name);
 
-  const date = document.createElement('p');
+  const date = document.createElement('div');
+  date.className = 'review-date';
   date.innerHTML = review.date;
-  li.appendChild(date);
+  reviewtop.appendChild(date);
 
-  const rating = document.createElement('p');
+  const rating = document.createElement('div');
   rating.className = 'review-rating';
   rating.innerHTML = `Rating: ${review.rating}`;
   li.appendChild(rating);
 
-  const comments = document.createElement('p');
+  const comments = document.createElement('div');
+  comments.className = 'review-comments';
   comments.innerHTML = review.comments;
   li.appendChild(comments);
 
