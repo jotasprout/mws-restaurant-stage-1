@@ -63,8 +63,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.alt = DBHelper.altTextForRestaurantImage(restaurant);
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
-  const cuisine = document.getElementById('restaurant-cuisine');
-  cuisine.innerHTML = restaurant.cuisine_type;
+  // const cuisine = document.getElementById('restaurant-cuisine');
+  // cuisine.innerHTML = restaurant.cuisine_type;
 
   // fill operating hours
   if (restaurant.operating_hours) {
