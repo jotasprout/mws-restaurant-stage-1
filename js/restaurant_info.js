@@ -17,7 +17,7 @@ window.initMap = () => {
       google.maps.event.addListenerOnce(self.map, 'idle', () => {
         document.getElementsByTagName('iframe')[0].title = "Google Maps";
       });
-      fillBreadcrumb();
+      //fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
   });
