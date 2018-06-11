@@ -7,6 +7,7 @@ body,td,th,p{
 	color: #fbfbfb;
 	line-height: 1.5;
 }
+
 body {
 	background-color: #fdfdfd;
 	margin: auto;
@@ -32,6 +33,7 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 #maincontent {
   background-color: #b5c588;;
   min-height: 100%;
+  padding: 5px;
 }
 header {
   width: 100%;
@@ -54,14 +56,23 @@ header h1 a {
   text-decoration: none;
 }
 #footer {
-  background-color: #444;
-  color: #aaa;
+  background-color: #252831;
+  color: #fff;
   font-size: 8pt;
   letter-spacing: 1px;
   padding: 25px;
   text-align: center;
   text-transform: uppercase;
 }
+
+
+/*
+.inside #footer {
+  bottom: 0;
+  position: absolute;
+  width: 50%;
+}
+*/
 /* ====================== Navigation ====================== */
 
 .skip-link {
@@ -137,6 +148,8 @@ nav h1 a {
   width: 100%;
   background-color: #ccc;
 }
+
+
 /* ====================== Restaurant Filtering ====================== */
 .filter-options {
   width: 100%;
@@ -222,7 +235,7 @@ nav h1 a {
   font-weight: 200;
   letter-spacing: 0;
   line-height: 1.3;
-  margin: 10px 0 5px;
+  margin: 10px 0 0px;
   text-transform: uppercase;
 }
 #restaurants-list p {
@@ -257,29 +270,7 @@ nav h1 a {
   z-index: 1000;
 }
 */
-.inside #map-container {
-  height: 400px;
-  /*
-  height: 87%;  
-  position: fixed;
-  background: blue none repeat scroll 0 0;  
-  right: 0;
-  top: 80px;
-  width: 50%;   
-  */
-}
-.inside #map {
-  height: 400px;
-  /*
-  width: 100%; 
-  background-color: #ccc;   
-  */  
-}
-.inside #footer {
-  bottom: 0;
-  position: absolute;
-  width: 50%;
-}
+
 #restaurant-name {
   color: #f18200;
   font-family: Arial,sans-serif;
@@ -347,7 +338,7 @@ nav h1 a {
 .review-top {
   background-color: rgb(0, 0, 0);
   color: #FFF;
-  font-size: 12pt;
+  font-size: 14pt;
   display: flex;
   flex-wrap: wrap;  
   flex-direction: row;
@@ -356,6 +347,7 @@ nav h1 a {
 .review-name {
   text-align: left;
   width: 50%;
+  font-weight: bold;
 }
 .review-date {
   text-align: right;
