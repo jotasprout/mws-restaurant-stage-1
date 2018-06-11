@@ -10,17 +10,11 @@
     
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <link rel="stylesheet" href="css/styles.css" type="text/css">
-  <link rel="stylesheet" href="css/styles-large.css" media="screen and (min-width:900px)" type="text/css">
-  <link rel="stylesheet" href="css/styles-medium.css" media="screen and (min-width:750px) and (max-width:899px)" type="text/css">
-  <link rel="stylesheet" href="css/styles-small.css" media="screen and (min-width:500px) and (max-width:749px)" type="text/css">  
-  <link rel="stylesheet" href="css/styles-xsmall.css" media="screen and (max-width:499px) and (max-width:749px)" type="text/css">  
+ 
   <title>Restaurant Reviews</title>
 </head>
 
 <body>
-  <!--
-    Will non-sighted users hear "Restaurant Reviews" before they press tab?
-  -->
 
   <a href="#maincontent" tabindex="0" class="skip-link">Skip to main content</a>
   <header>
@@ -35,18 +29,15 @@
     </section>
     <section id="maincontent">
       <div class="filter-options">
-<!--
-  <h2>Filter Results</h2>
-  <label for="neighborhoods-select"></label>
--->
+      
         <label><div class="menu-label">Filter by Neighborhood</div>
-          <select id="neighborhoods-select" name="neighborhoods" role="combobox" onchange="updateRestaurants()">
+          <select id="neighborhoods-select" name="neighborhoods" onchange="updateRestaurants()">
             <option value="all" role="option">All Neighborhoods</option>
           </select>
         </label>
 
         <label><div class="menu-label">Filter by Cuisine</div>
-          <select id="cuisines-select" name="cuisines" role="combobox" onchange="updateRestaurants()">
+          <select id="cuisines-select" name="cuisines" onchange="updateRestaurants()">
             <option value="all" role="option">All Cuisines</option>
           </select>
         </label>
@@ -63,21 +54,11 @@
       scope: './'
     });
   </script>
-  <!--
-    <script src="js/start-sw.js"></script>
-    Above was external file because I was scared of plagiarism accusation but it wouldn't work.
-  -->
 
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <script type="application/javascript" charset="utf-8" src="js/main.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap"></script>
   <script src="js/sw-logging.js"></script>
-
-  <!--
-    Why are the scripts before the footer? 
-    Everything I've read says make them last thing before closing body tag. 
-    Ask and look up.
-  -->
 
   <footer id="footer">
     Copyright (c) 2018 <strong>Restaurant Reviews</strong> All Rights Reserved.
