@@ -1,0 +1,24 @@
+{
+  "name": "mws-restaurant-stage-1",
+  "version": "1.0.0",
+  "description": "front end for restaurant reviews app",
+  "main": "./src/sw.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.14.0",
+    "webpack-cli": "^3.0.8"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jotasprout/mws-restaurant-stage-1.git"
+  },
+  "author": "Jay Sprout",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jotasprout/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/jotasprout/mws-restaurant-stage-1#readme"
+}
