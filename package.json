@@ -9,7 +9,8 @@
     "webpack-cli": "^3.0.8"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --w"
   },
   "repository": {
     "type": "git",
