@@ -7,9 +7,10 @@ class DBHelper {
    * Database URL.
    */
   static get DATABASE_URL() {
-    const port = 1337 // Change this to your server port
-    return `http://localhost:${port}/data/restaurants.json`;
-  }
+    const port = 1337; // Change this to your server port
+    // return `http://localhost:${port}/data/restaurants.json`;
+    return `http://localhost:${port}/restaurants`;
+  };
 
   /* OLD Fetch all restaurants. 
 
@@ -31,13 +32,17 @@ class DBHelper {
   */
 
   /* NEW Fetch all restaurants. */
-  const thing = 'http://localhost:1337/data/restaurants.json';
 
-  fetch (thing)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
+  static fetchRestaurants(callback) {
+    let thing;
+    thing = DBHelper.DATABASE_URL;
+
+    fetch (thing)
+    .then((response) => {
+      response.json().then(restaurants => {
+        console.log(restaurants);
     });
+  }
 
   /* OLD Fetch a restaurant by its ID. */
 
