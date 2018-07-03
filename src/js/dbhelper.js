@@ -5,16 +5,14 @@ class DBHelper {
 
   /**
    * Database URL.
-   * Change this to restaurants.json file location on your server.
    */
   static get DATABASE_URL() {
     const port = 1337 // Change this to your server port
     return `http://localhost:${port}/data/restaurants.json`;
   }
 
-  /**
-   * Fetch all restaurants.
-   */
+  /* OLD Fetch all restaurants. */
+
   static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', DBHelper.DATABASE_URL);
@@ -31,9 +29,13 @@ class DBHelper {
     xhr.send();
   }
 
-  /**
-   * Fetch a restaurant by its ID.
-   */
+  /* NEW Fetch all restaurants. */
+
+  fetch('http://localhost:${port}/data/restaurants.json', {
+  })
+
+  /* OLD Fetch a restaurant by its ID. */
+
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -49,6 +51,8 @@ class DBHelper {
       }
     });
   }
+
+  /* NEW Fetch a restaurant by its ID. */
 
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
