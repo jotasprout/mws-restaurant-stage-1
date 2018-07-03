@@ -41,6 +41,7 @@ class DBHelper {
     .then((response) => {
       response.json().then(restaurants => {
         console.log(restaurants);
+      });
     });
   }
 
@@ -64,6 +65,11 @@ class DBHelper {
 
   /* NEW Fetch a restaurant by its ID. */
 
+  static fetchRestaurantById(id, callback) {
+    DBHelper.fetchRestaurants (restaurants) => {
+      const restaurant = restaurants.find(r => r.id == id);
+    }
+  }
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
    */
