@@ -11,7 +11,7 @@ class DBHelper {
     return `http://localhost:${port}/data/restaurants.json`;
   }
 
-  /* OLD Fetch all restaurants. */
+  /* OLD Fetch all restaurants. 
 
   static fetchRestaurants(callback) {
     let xhr = new XMLHttpRequest();
@@ -28,11 +28,16 @@ class DBHelper {
     };
     xhr.send();
   }
+  */
 
   /* NEW Fetch all restaurants. */
+  const thing = 'http://localhost:1337/data/restaurants.json';
 
-  fetch('http://localhost:${port}/data/restaurants.json', {
-  })
+  fetch (thing)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 
   /* OLD Fetch a restaurant by its ID. */
 
