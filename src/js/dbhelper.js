@@ -12,6 +12,26 @@ class DBHelper {
     return `http://localhost:${port}/restaurants`;
   };
 
+
+  /* NEW Fetch all restaurants. */
+
+  static fetchRestaurants(callback) {
+    // let thing;
+    // thing = DBHelper.DATABASE_URL;
+
+    return fetch (`${DBHelper.DATABASE_URL}`)
+    .then((res) => {
+      return res.json();
+    }).then((res) => {
+      // debugger;
+      const restaurants = res;
+      callback(null, restaurants);
+      console.log(restaurants);
+    }).catch((error) => {
+        callback(error, null);
+    });
+  }
+
   /* OLD Fetch all restaurants. 
 
   static fetchRestaurants(callback) {
@@ -31,20 +51,6 @@ class DBHelper {
   }
   */
 
-  /* NEW Fetch all restaurants. */
-
-  static fetchRestaurants(callback) {
-    let thing;
-    thing = DBHelper.DATABASE_URL;
-
-    fetch (thing)
-    .then((response) => {
-      response.json().then(restaurants => {
-        console.log(restaurants);
-        callback(null, restaurants);
-      });
-    });
-  }
 
   /* OLD Fetch a restaurant by its ID. 
 
@@ -142,7 +148,6 @@ class DBHelper {
         // Remove duplicates from neighborhoods
         const uniqueNeighborhoods = neighborhoods.filter((v, i) => neighborhoods.indexOf(v) == i)
         callback(null, uniqueNeighborhoods);
-        console.log(uniqueNeighborhoods);
       }
     });
   }
@@ -152,14 +157,12 @@ class DBHelper {
    */
   static fetchCuisines(callback) {
     // Fetch all restaurants
-    console.log("entering dbhelperjs fetchCuisines function");
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
         console.log("why no error for cuisines?");
         callback(error, null);
       } else {
         // Get all cuisines from all restaurants
-        console.log("entering else in dbhelperjs fetchCuisines");
         const cuisines = restaurants.map((v, i) => restaurants[i].cuisine_type)
         // Remove duplicates from cuisines
         const uniqueCuisines = cuisines.filter((v, i) => cuisines.indexOf(v) == i)

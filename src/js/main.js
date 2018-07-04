@@ -1,8 +1,8 @@
 let restaurants,
   neighborhoods,
-  cuisines
-var map
-var markers = []
+  cuisines;
+var map;
+var markers = [];
 
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
@@ -14,13 +14,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 /* Fetch all neighborhoods and set their HTML */
 const fetchNeighborhoods = () => {
-  console.log("entering mainjs fetchNeighborhoods function");
   DBHelper.fetchNeighborhoods((error, neighborhoods) => {
     if (error) { // Got an error
       console.error(error);
     } else {
       self.neighborhoods = neighborhoods;
-      console.log(self.neighborhoods);
       fillNeighborhoodsHTML();
     }
   });
@@ -37,16 +35,6 @@ const fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     select.append(option);
   });
 };
-
-
-
-
-
-
-
-
-
-
 
 /**
  * Fetch all cuisines and set their HTML.
@@ -66,7 +54,6 @@ fetchCuisines = () => {
  * Set cuisines HTML.
  */
 fillCuisinesHTML = (cuisines = self.cuisines) => {
-  console.log("entering mainjs fillCuisinesHTML function");
   const select = document.getElementById('cuisines-select');
 
   cuisines.forEach(cuisine => {
@@ -82,13 +69,14 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
  * Initialize leaflet map, called from HTML.
  */
 initMap = () => {
+  console.log("inside mainjs initMap");
   self.newMap = L.map('map', {
         center: [40.722216, -73.987501],
         zoom: 12,
         scrollWheelZoom: false
       });
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-    mapboxToken: '<pk.eyJ1Ijoiam90YXNwcm91dCIsImEiOiJjamoyOHV5Z2EwemR1M3FvZ3Fmajl2N2loIn0.srfd-ekJk1drEoaZMm0Gdw>',
+    mapboxToken: 'pk.eyJ1Ijoiam90YXNwcm91dCIsImEiOiJjamoyOHV5Z2EwemR1M3FvZ3Fmajl2N2loIn0.srfd-ekJk1drEoaZMm0Gdw',
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -114,7 +102,8 @@ initMap = () => {
 /**
  * Update page and map for current restaurants.
  */
-updateRestaurants = () => {
+const updateRestaurants = () => {
+  console.log("inside mainjs updateRestaurants");
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
 
@@ -130,9 +119,9 @@ updateRestaurants = () => {
     } else {
       resetRestaurants(restaurants);
       fillRestaurantsHTML();
-    }
-  })
-}
+    };
+  });
+};
 
 /**
  * Clear current restaurants, their HTML and remove their map markers.
@@ -149,21 +138,19 @@ resetRestaurants = (restaurants) => {
   self.restaurants = restaurants;
 }
 
-/**
- * Create all restaurants HTML and add them to the webpage.
- */
-fillRestaurantsHTML = (restaurants = self.restaurants) => {
+/* Create all restaurants HTML and add them to the webpage */
+const fillRestaurantsHTML = (restaurants = self.restaurants) => {
+  console.log("inside mainjs fillRestaurantsHTML");
   const ul = document.getElementById('restaurants-list');
   restaurants.forEach(restaurant => {
     ul.append(createRestaurantHTML(restaurant));
   });
   addMarkersToMap();
-}
+};
 
-/**
- * Create restaurant HTML.
- */
-createRestaurantHTML = (restaurant) => {
+/* Create restaurant HTML */
+const createRestaurantHTML = (restaurant) => {
+  console.log("inside mainjs createRestaurantHTML");
   const li = document.createElement('li');
   li.className = 'restaurant-container';
   const image = document.createElement('img');
@@ -187,10 +174,10 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  li.append(more);
 
-  return li
-}
+  return li;
+};
 
 /**
  * Add markers for current restaurants to the map.
