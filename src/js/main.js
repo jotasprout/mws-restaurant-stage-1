@@ -66,6 +66,13 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
 }
 
 /**
+ * Initialize map as soon as the page is loaded.
+ */
+document.addEventListener('DOMContentLoaded', (event) => {  
+  initMap();
+});
+
+/**
  * Initialize leaflet map, called from HTML.
  */
 initMap = () => {
