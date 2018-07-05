@@ -1,6 +1,4 @@
-/**
- * Common database helper functions.
- */
+/* Common database helper functions */
 class DBHelper {
 
   /**
@@ -11,7 +9,6 @@ class DBHelper {
     // return `http://localhost:${port}/data/restaurants.json`;
     return `http://localhost:${port}/restaurants`;
   };
-
 
   /* NEW Fetch all restaurants. */
 
