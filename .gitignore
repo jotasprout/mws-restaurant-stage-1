@@ -1,1 +1,6 @@
 js/samples
+node_modules
+.gitignore
+.vscode
+.DS_Store
+CODEOWNERS

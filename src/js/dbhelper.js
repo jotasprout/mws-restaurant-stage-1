@@ -49,7 +49,7 @@ class DBHelper {
   */
 
 
-  /* OLD Fetch a restaurant by its ID. 
+  /* OLD Fetch a restaurant by its ID.   */
 
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
@@ -66,9 +66,9 @@ class DBHelper {
       }
     });
   }
-  */
 
-  /* NEW Fetch a restaurant by its ID. */
+
+  /* NEW Fetch a restaurant by its ID. 
 
   static fetchRestaurantById(id, callback) {
     DBHelper.fetchRestaurants ((callback) => {
@@ -78,6 +78,10 @@ class DBHelper {
       }
     });
   }
+
+  */
+
+  
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
    */
