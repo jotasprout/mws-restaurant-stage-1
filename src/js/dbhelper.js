@@ -170,8 +170,11 @@ class DBHelper {
    * Watch last part of video if you get stuck
    */
   static imageUrlForRestaurant(restaurant) {
-    // return (`/img/${restaurant.photograph}`);
-    return (`/img/${restaurant.photograph}` + '.jpg');
+    if (restaurant.photograph) {
+      return (`/img/${restaurant.photograph}` + '.jpg');
+    } else {
+      return ('http://localhost:8000/img/404.jpg');
+    }
   }
 
   /**

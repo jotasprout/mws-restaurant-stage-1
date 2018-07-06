@@ -29,7 +29,7 @@ initMap = () => {
           'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         id: 'mapbox.streets'    
       }).addTo(newMap);
-      fillBreadcrumb();
+      // fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.newMap);
     }
   });
@@ -175,15 +175,15 @@ createReviewHTML = (review) => {
   return li;
 }
 
-/**
- * Add restaurant name to the breadcrumb navigation menu
- */
+/* Add restaurant name to the breadcrumb navigation menu
 fillBreadcrumb = (restaurant=self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
   li.innerHTML = restaurant.name;
   breadcrumb.appendChild(li);
 }
+ */
+
 
 /**
  * Get a parameter by name from page URL.
