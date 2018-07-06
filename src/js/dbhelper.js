@@ -67,20 +67,6 @@ class DBHelper {
     });
   }
 
-
-  /* NEW Fetch a restaurant by its ID. 
-
-  static fetchRestaurantById(id, callback) {
-    DBHelper.fetchRestaurants ((callback) => {
-      const restaurant = restaurants.find(r => r.id == id);
-      if (restaurant) {
-        callback(null, restaurant);
-      }
-    });
-  }
-
-  */
-
   
   /**
    * Fetch restaurants by a cuisine type with proper error handling.
@@ -160,7 +146,6 @@ class DBHelper {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
       if (error) {
-        console.log("why no error for cuisines?");
         callback(error, null);
       } else {
         // Get all cuisines from all restaurants
@@ -181,9 +166,12 @@ class DBHelper {
 
   /**
    * Restaurant image URL.
+   * http://localhost:1337/restaurants/{3}
+   * Watch last part of video if you get stuck
    */
   static imageUrlForRestaurant(restaurant) {
-    return (`/img/${restaurant.photograph}`);
+    // return (`/img/${restaurant.photograph}`);
+    return (`/img/${restaurant.photograph}` + '.jpg');
   }
 
   /**
