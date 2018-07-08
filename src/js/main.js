@@ -4,9 +4,7 @@ let restaurants,
 var map;
 var markers = [];
 
-/**
- * Fetch neighborhoods and cuisines as soon as the page is loaded.
- */
+/* Fetch neighborhoods and cuisines as soon as the page is loaded. */
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
@@ -36,9 +34,7 @@ const fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   });
 };
 
-/**
- * Fetch all cuisines and set their HTML.
- */
+/* Fetch all cuisines and set their HTML. */
 fetchCuisines = () => {
   DBHelper.fetchCuisines((error, cuisines) => {
     if (error) { // Got an error!
@@ -50,9 +46,7 @@ fetchCuisines = () => {
   });
 }
 
-/**
- * Set cuisines HTML.
- */
+/* Set cuisines HTML. */
 fillCuisinesHTML = (cuisines = self.cuisines) => {
   const select = document.getElementById('cuisines-select');
 
@@ -65,16 +59,12 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
   });
 }
 
-/**
- * Initialize map as soon as the page is loaded.
- */
+/* Initialize map as soon as the page is loaded. */
 document.addEventListener('DOMContentLoaded', (event) => {  
   initMap();
 });
 
-/**
- * Initialize leaflet map, called from HTML.
- */
+/* Initialize leaflet map, called from HTML. */
 initMap = () => {
   self.newMap = L.map('map', {
         center: [40.722216, -73.987501],
@@ -93,9 +83,7 @@ initMap = () => {
   updateRestaurants();
 }
 
-/**
- * Update page and map for current restaurants.
- */
+/* Update page and map for current restaurants. */
 const updateRestaurants = () => {
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
@@ -116,9 +104,7 @@ const updateRestaurants = () => {
   });
 };
 
-/**
- * Clear current restaurants, their HTML and remove their map markers.
- */
+/* Clear current restaurants, their HTML and remove their map markers. */
 resetRestaurants = (restaurants) => {
   // Remove all restaurants
   self.restaurants = [];
@@ -126,7 +112,7 @@ resetRestaurants = (restaurants) => {
   ul.innerHTML = '';
 
   // Remove all map markers
-  self.markers.forEach(m => m.setMap(null));
+  // self.markers.forEach(m => m.setMap(null));
   self.markers = [];
   self.restaurants = restaurants;
 }
