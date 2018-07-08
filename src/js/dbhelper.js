@@ -29,26 +29,6 @@ class DBHelper {
     });
   }
 
-  /* OLD Fetch all restaurants. 
-
-  static fetchRestaurants(callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', DBHelper.DATABASE_URL);
-    xhr.onload = () => {
-      if (xhr.status === 200) { // Got a success response from server!
-        const json = JSON.parse(xhr.responseText);
-        const restaurants = json.restaurants;
-        callback(null, restaurants);
-      } else { // Oops!. Got an error from server.
-        const error = (`Request failed. Returned status of ${xhr.status}`);
-        callback(error, null);
-      }
-    };
-    xhr.send();
-  }
-  */
-
-
   /* OLD Fetch a restaurant by its ID.   */
 
   static fetchRestaurantById(id, callback) {
@@ -68,9 +48,7 @@ class DBHelper {
   }
 
   
-  /**
-   * Fetch restaurants by a cuisine type with proper error handling.
-   */
+  /* Fetch restaurants by a cuisine type with proper error handling. */
   static fetchRestaurantByCuisine(cuisine, callback) {
     // Fetch all restaurants  with proper error handling
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -84,9 +62,7 @@ class DBHelper {
     });
   }
 
-  /**
-   * Fetch restaurants by a neighborhood with proper error handling.
-   */
+  /* Fetch restaurants by a neighborhood with proper error handling. */
   static fetchRestaurantByNeighborhood(neighborhood, callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -100,9 +76,7 @@ class DBHelper {
     });
   }
 
-  /**
-   * Fetch restaurants by a cuisine and a neighborhood with proper error handling.
-   */
+  /* Fetch restaurants by a cuisine and a neighborhood with proper error handling. */
   static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -121,9 +95,7 @@ class DBHelper {
     });
   }
 
-  /**
-   * Fetch all neighborhoods with proper error handling.
-   */
+  /* Fetch all neighborhoods with proper error handling. */
   static fetchNeighborhoods(callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -139,9 +111,7 @@ class DBHelper {
     });
   }
 
-  /**
-   * Fetch all cuisines with proper error handling.
-   */
+  /* Fetch all cuisines with proper error handling. */
   static fetchCuisines(callback) {
     // Fetch all restaurants
     DBHelper.fetchRestaurants((error, restaurants) => {
