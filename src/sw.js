@@ -1,9 +1,10 @@
 const restImgCache = 'rest-img';
+const restCache = 'restaurant';
 
 self.addEventListener('install', function(event) {
     event.waitUntil(
         // stores stuff in the cache
-        caches.open('restaurant').then(function(cache) {
+        caches.open(restCache).then(function(cache) {
             return cache.addAll([
                 './',
                 'js/dbhelper.js',
