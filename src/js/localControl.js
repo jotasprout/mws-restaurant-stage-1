@@ -9,17 +9,21 @@ var dbPromise = idb.open ('restaurant-db', 1, function (upgradeDb) {
 dbPromise.then (function(db) {
     var tx = db.transaction('restaurant-store', 'readwrite');
     var restaurantStore = tx.objectStore('restaurant-store');
-    DBHelper.fetchRestaurants(restaurants);
-
-    // need to define restaurantData (variable for data) -- get from JSON
-    restaurants.forEach (function (restaurant) {
-        restaurantStore.add(restaurant.name); // one of these for each key val pair
-        restaurantStore.add(restaurant.cuisine_type);   
-        restaurantStore.add(restaurant.neighborhood);     
+    DBHelper.fetchRestaurants((error, restaurants) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        restaurants.forEach (function (restaurant) {
+          restaurantStore.add(restaurant.name); // one of these for each key val pair
+          restaurantStore.add(restaurant.cuisine_type);   
+          restaurantStore.add(restaurant.neighborhood);     
+        });
+      }
     });
 });
 
 // use below as a model then delete
+/*
 static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -35,3 +39,4 @@ static fetchRestaurantById(id, callback) {
       }
     });
   }
+  */
