@@ -16,18 +16,47 @@ class DBHelper {
     // let thing;
     // thing = DBHelper.DATABASE_URL;
 
-    return fetch (`${DBHelper.DATABASE_URL}`)
-    .then((res) => {
-      return res.json();
-    }).then((res) => {
-      // debugger;
-      const restaurants = res;
-      callback(null, restaurants);
-      console.log(restaurants);
-    }).catch((error) => {
-        callback(error, null);
+    const dbPromise = idb.open ('restaurant-db', 1, function (upgradeDb) {
+      const store = upgradeDb.createObjectStore('restaurant-store');
+      store.createIndex('by-neighborhood', 'neighborhood');
+      store.createIndex('by-cuisine', 'cuisine_type');
+    });
+
+    dbPromise.then (function(db) {
+      var tx = db.transaction('restaurant-store', 'readwrite');
+      var res = tx.objectStore('restaurant-store');
+      return res.getAll();
+    }).then(function(restaurants) {
+      if (restaurants.length !==0){
+        callback(null, restaurants);
+      } else {
+        fetch (`${DBHelper.DATABASE_URL}`)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(restaurants) {
+          dbPromise.then(function(db){
+            var tx = db.transaction('restaurant-store', 'readwrite');
+            var res = tx.objectStore('restaurant-store');
+            for (var restaurant of restaurants) {
+              res.put(restaurant); 
+              // res.put(restaurant.name);  
+              // res.put(restaurant.cuisine_type);  
+              // res.put(restaurant.neighborhood);   
+            };
+          callback(null, restaurants);
+          return tx.complete;  
+          }).then(function(){
+            console.log("added restaurants");
+          }).catch(function(error){
+          console.log(error);
+          })  
+        })      
+      }
     });
   }
+
+
 
   /* OLD Fetch a restaurant by its ID.   */
 
