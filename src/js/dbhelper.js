@@ -39,12 +39,16 @@ class DBHelper {
             var tx = db.transaction('restaurant-store', 'readwrite');
             var res = tx.objectStore('restaurant-store');
             for (var restaurant of restaurants) {
-              res.put(restaurant); 
-              // res.put(restaurant.name);  
-              // res.put(restaurant.cuisine_type);  
-              // res.put(restaurant.neighborhood);   
+              res.put(restaurant.name, 'name'); 
+              res.put(restaurant.photograph, 'photograph'); 
+              res.put(restaurant.address, 'address'); 
+              res.put(restaurant.latlng.lat, 'restaurant.latlng.lat'); 
+              res.put(restaurant.latlng.lng, 'restaurant.latlng.lng');  
+              res.put(restaurant.cuisine_type, 'cuisine_type');  
+              res.put(restaurant.neighborhood, 'neighborhood');   
             };
           callback(null, restaurants);
+
           return tx.complete;  
           }).then(function(){
             console.log("added restaurants");
