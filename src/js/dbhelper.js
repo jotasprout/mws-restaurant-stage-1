@@ -17,7 +17,9 @@ class DBHelper {
     // thing = DBHelper.DATABASE_URL;
 
     const dbPromise = idb.open ('restaurant-db', 1, function (upgradeDb) {
-      const store = upgradeDb.createObjectStore('restaurant-store');
+      const store = upgradeDb.createObjectStore('restaurant-store', {
+        keyPath: 'id'
+      });
       store.createIndex('by-neighborhood', 'neighborhood');
       store.createIndex('by-cuisine', 'cuisine_type');
     });
@@ -38,29 +40,33 @@ class DBHelper {
           dbPromise.then(function(db){
             var tx = db.transaction('restaurant-store', 'readwrite');
             var res = tx.objectStore('restaurant-store');
-            for (var restaurant of restaurants) {
-              res.put(restaurant.name, 'name'); 
-              res.put(restaurant.photograph, 'photograph'); 
-              res.put(restaurant.address, 'address'); 
-              res.put(restaurant.latlng.lat, 'restaurant.latlng.lat'); 
-              res.put(restaurant.latlng.lng, 'restaurant.latlng.lng');  
-              res.put(restaurant.cuisine_type, 'cuisine_type');  
-              res.put(restaurant.neighborhood, 'neighborhood');   
-            };
+            restaurants.forEach(
+              restaurant => res.put(restaurant)
+            ); 
+            return tx.complete; 
+          });
           callback(null, restaurants);
 
-          return tx.complete;  
           }).then(function(){
             console.log("added restaurants");
           }).catch(function(error){
-          console.log(error);
-          })  
-        })      
+            console.log(error);
+          })       
       }
     });
   }
 
-
+/*
+{
+  res.put(restaurant.name, 'name'); 
+  res.put(restaurant.photograph, 'photograph'); 
+  res.put(restaurant.address, 'address'); 
+  res.put(restaurant.latlng.lat, 'restaurant.latlng.lat'); 
+  res.put(restaurant.latlng.lng, 'restaurant.latlng.lng');  
+  res.put(restaurant.cuisine_type, 'cuisine_type');  
+  res.put(restaurant.neighborhood, 'neighborhood');   
+};
+*/
 
   /* OLD Fetch a restaurant by its ID.   */
 
