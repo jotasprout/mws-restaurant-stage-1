@@ -1,9 +1,7 @@
 /* Common database helper functions */
 class DBHelper {
 
-  /**
-   * Database URL.
-   */
+  /* Database URL */
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
     // return `http://localhost:${port}/data/restaurants.json`;
@@ -29,7 +27,7 @@ class DBHelper {
     });
   }
 
-  /* OLD Fetch a restaurant by its ID.   */
+  /* Fetch a restaurant by its ID. */
 
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
@@ -47,8 +45,7 @@ class DBHelper {
     });
   }
 
-  
-  /* Fetch restaurants by a cuisine type with proper error handling. */
+    /* Fetch restaurants by a cuisine type with proper error handling. */
   static fetchRestaurantByCuisine(cuisine, callback) {
     // Fetch all restaurants  with proper error handling
     DBHelper.fetchRestaurants((error, restaurants) => {
