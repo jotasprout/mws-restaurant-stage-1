@@ -1,21 +1,20 @@
 /* Common database helper functions */
 class DBHelper {
 
-  /**
-   * Database URL.
-   */
+  /* Database URL */
   static get DATABASE_URL() {
     const port = 1337; // Change this to your server port
     // return `http://localhost:${port}/data/restaurants.json`;
     return `http://localhost:${port}/restaurants`;
   };
 
-  /* NEW Fetch all restaurants. */
-
+  /* NEW Fetch all restaurants. 
+  
   static fetchRestaurants(callback) {
-    // let thing;
-    // thing = DBHelper.DATABASE_URL;
+    let dataSource;
+    dataSource = DBHelper.DATABASE_URL;
 
+<<<<<<< HEAD
     const dbPromise = idb.open ('restaurant-db', 1, function (upgradeDb) {
       const store = upgradeDb.createObjectStore('restaurant-store', {
         keyPath: 'id'
@@ -69,6 +68,69 @@ class DBHelper {
 */
 
   /* OLD Fetch a restaurant by its ID.   */
+=======
+    // return fetch (`${DBHelper.DATABASE_URL}`)
+    return fetch (dataSource)
+    .then((res) => {
+      return res.json();
+    }).then((res) => {
+      // debugger;
+      const restaurants = res;
+      callback(null, restaurants);
+      console.log(restaurants);
+    }).catch((error) => {
+        callback(error, null);
+    });
+  }
+
+  */
+
+ static fetchRestaurants(callback) {
+  // let thing;
+  // thing = DBHelper.DATABASE_URL;
+
+  const dbPromise = idb.open ('restaurant-db', 1, function (upgradeDb) {
+    const store = upgradeDb.createObjectStore('restaurant-store', {
+      keyPath: 'id'
+    });
+    store.createIndex('by-neighborhood', 'neighborhood');
+    store.createIndex('by-cuisine', 'cuisine_type');
+  });
+
+  dbPromise.then (function(db) {
+    var tx = db.transaction('restaurant-store', 'readwrite');
+    var res = tx.objectStore('restaurant-store');
+    return res.getAll();
+  }).then(function(restaurants) {
+    if (restaurants.length !==0){
+      callback(null, restaurants);
+    } else {
+      fetch (`${DBHelper.DATABASE_URL}`)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(restaurants) {
+        dbPromise.then(function(db){
+          var tx = db.transaction('restaurant-store', 'readwrite');
+          var res = tx.objectStore('restaurant-store');
+          restaurants.forEach(
+            restaurant => res.put(restaurant)
+          ); 
+          return tx.complete; 
+        });
+        callback(null, restaurants);
+
+        }).then(function(){
+          console.log("added restaurants");
+        }).catch(function(error){
+          console.log(error);
+        })       
+    }
+  });
+}
+
+  /* Fetch a restaurant by its ID. */
+>>>>>>> startingIDBover
 
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
@@ -86,8 +148,7 @@ class DBHelper {
     });
   }
 
-  
-  /* Fetch restaurants by a cuisine type with proper error handling. */
+    /* Fetch restaurants by a cuisine type with proper error handling. */
   static fetchRestaurantByCuisine(cuisine, callback) {
     // Fetch all restaurants  with proper error handling
     DBHelper.fetchRestaurants((error, restaurants) => {
