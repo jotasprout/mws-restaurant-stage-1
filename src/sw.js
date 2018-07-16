@@ -23,6 +23,13 @@ self.addEventListener('fetch', function(event) {
         event.respondWith(showImg(event.request));
         return;
     }
+    /*
+    if (requestUrl.pathname === '/') {
+        event.respondWith(caches.match('./'));
+        return;
+    }
+    
+    */
     event.respondWith(
         caches.match(event.request).then(function(response) {
             if (response) {
@@ -32,6 +39,7 @@ self.addEventListener('fetch', function(event) {
         })
     );
 });
+
 
 function showImg(request) {
     let localImgName = request.url.replace(/-\d+px\.jpg$/, '');
