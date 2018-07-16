@@ -1,4 +1,5 @@
 /* Common database helper functions */
+
 class DBHelper {
 
   /* Database URL */
@@ -14,6 +15,7 @@ class DBHelper {
     let dataSource;
     dataSource = DBHelper.DATABASE_URL;
 
+    /* Creates local db, object store, and indexes for sorting */
     const dbPromise = idb.open ('restaurant-db', 1, function (upgradeDb) {
       const store = upgradeDb.createObjectStore('restaurant-store', {
         keyPath: 'id'
@@ -27,46 +29,40 @@ class DBHelper {
       var res = tx.objectStore('restaurant-store');
       return res.getAll();
     }).then(function(restaurants) {
+      // if any restaurants are returned from local db call them back
       if (restaurants.length !==0){
         callback(null, restaurants);
       } else {
+        // if no restaurants were returned from local db fetch restaurants from server
         fetch (`${DBHelper.DATABASE_URL}`)
         .then(function(response) {
           return response.json();
         })
         .then(function(restaurants) {
+          // put restaurants from server into local db
           dbPromise.then(function(db){
             var tx = db.transaction('restaurant-store', 'readwrite');
             var res = tx.objectStore('restaurant-store');
             restaurants.forEach(
               restaurant => res.put(restaurant)
             ); 
+            callback(null, restaurants);
             return tx.complete; 
           });
-          callback(null, restaurants);
+          // commenting out next line and moving it before 'return tx.complete' above
+          // callback(null, restaurants);
 
-          }).then(function(){
-            console.log("added restaurants");
-          }).catch(function(error){
-            console.log(error);
-          })       
+          });
       }
-    });
-  }
+    }).then(function(){
+        console.log("added restaurants");
+      }).catch(function(error){
+        console.log(error);
+      }); // end of dbPromise.then       
 
-/*
-{
-  res.put(restaurant.name, 'name'); 
-  res.put(restaurant.photograph, 'photograph'); 
-  res.put(restaurant.address, 'address'); 
-  res.put(restaurant.latlng.lat, 'restaurant.latlng.lat'); 
-  res.put(restaurant.latlng.lng, 'restaurant.latlng.lng');  
-  res.put(restaurant.cuisine_type, 'cuisine_type');  
-  res.put(restaurant.neighborhood, 'neighborhood');   
-};
-*/
+  } // end of fetchRestaurants
 
-  /* OLD Fetch a restaurant by its ID.   */
+  /* Fetch a restaurant by its ID */
 
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
@@ -163,9 +159,7 @@ class DBHelper {
     });
   }
 
-  /**
-   * Restaurant page URL.
-   */
+  /* Restaurant page URL */
   static urlForRestaurant(restaurant) {
     return (`./restaurant.html?id=${restaurant.id}`);
   }

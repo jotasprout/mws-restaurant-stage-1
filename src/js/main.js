@@ -4,13 +4,17 @@ let restaurants,
 var map;
 var markers = [];
 
+console.log(location.origin);
+
 /* Fetch neighborhoods and cuisines as soon as the page is loaded. */
+
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
 });
 
 /* Fetch all neighborhoods and set their HTML */
+
 const fetchNeighborhoods = () => {
   DBHelper.fetchNeighborhoods((error, neighborhoods) => {
     if (error) { // Got an error
@@ -23,6 +27,7 @@ const fetchNeighborhoods = () => {
 };
 
 /* Set neighborhoods HTML */
+
 const fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   const select = document.getElementById('neighborhoods-select');
   neighborhoods.forEach(neighborhood => {
@@ -35,6 +40,7 @@ const fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
 };
 
 /* Fetch all cuisines and set their HTML. */
+
 fetchCuisines = () => {
   DBHelper.fetchCuisines((error, cuisines) => {
     if (error) { // Got an error!
@@ -47,6 +53,7 @@ fetchCuisines = () => {
 }
 
 /* Set cuisines HTML. */
+
 fillCuisinesHTML = (cuisines = self.cuisines) => {
   const select = document.getElementById('cuisines-select');
 
@@ -60,11 +67,13 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
 }
 
 /* Initialize map as soon as the page is loaded. */
+
 document.addEventListener('DOMContentLoaded', (event) => {  
   initMap();
 });
 
 /* Initialize leaflet map, called from HTML. */
+
 initMap = () => {
   self.newMap = L.map('map', {
         center: [40.722216, -73.987501],
@@ -158,9 +167,8 @@ const createRestaurantHTML = (restaurant) => {
   return li;
 };
 
-/**
- * Add markers for current restaurants to the map.
- */
+/* Add markers for current restaurants to the map */
+
 addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
