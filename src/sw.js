@@ -3,10 +3,11 @@ const restCache = 'restaurant';
 
 self.addEventListener('install', function(event) {
     event.waitUntil(
-        // stores stuff in the cache
         caches.open(restCache).then(function(cache) {
             return cache.addAll([
                 './',
+                'index.html',
+                'js/idb.js',
                 'js/dbhelper.js',
                 'js/main.js',
                 'js/restaurant_info.js',
@@ -23,12 +24,12 @@ self.addEventListener('fetch', function(event) {
         event.respondWith(showImg(event.request));
         return;
     }
-    /*
+
     if (requestUrl.pathname === '/') {
         event.respondWith(caches.match('./'));
         return;
     }
-    
+    /*   
     */
     event.respondWith(
         caches.match(event.request).then(function(response) {
