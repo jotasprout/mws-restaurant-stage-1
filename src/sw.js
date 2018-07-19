@@ -7,6 +7,7 @@ self.addEventListener('install', function(event) {
             return cache.addAll([
                 './',
                 'index.html',
+                'favicon.ico',
                 'js/idb.js',
                 'js/dbhelper.js',
                 'js/main.js',

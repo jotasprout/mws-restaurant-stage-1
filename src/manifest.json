@@ -1,0 +1,20 @@
+{
+    "short_name": "Restaurants",
+    "name": "Groovy Restaurants",
+    "icons": [
+        {
+            "src": "src/img/icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "src/img/icon-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }        
+    ],
+    "start_url": "index.html",
+    "background_color": "#b5c588",
+    "display": "standalone",
+    "theme_color": "#252831"
+}

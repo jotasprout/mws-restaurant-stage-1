@@ -1,4 +1,14 @@
 @charset "utf-8";
+
+/* CSS Document */
+.leaflet-container a {
+  color: rgb(0, 38, 53);
+}
+
+.leaflet-container a {
+  -webkit-tap-highlight-color: rgba(0, 38, 53, 0.4);
+}
+
 /* CSS Document */
 body,td,th,p{
 	font-family: Arial, Helvetica, sans-serif;
@@ -125,11 +135,15 @@ header h1 a {
   border-radius: 25px 0px 0px 0px;
   overflow: hidden;
 }
+
+/*
 #restaurant-container {
   margin: 20px;
   width: 500px;
   max-width: 500px;
 }
+*/
+
 .restaurant-container .restaurant-img {
   border-radius: 25px 0px 0px 0px;
 }
