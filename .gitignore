@@ -1,7 +1,5 @@
-js/samples
+examples
 node_modules
 .gitignore
 .vscode
 .DS_Store
-CODEOWNERS
-nope
