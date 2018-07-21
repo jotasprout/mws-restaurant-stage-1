@@ -1,3 +1,5 @@
+import './css/yucky.css'
+
 const restImgCache = 'rest-img';
 const restCache = 'restaurant';
 
