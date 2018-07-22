@@ -2,11 +2,11 @@ const path = require ("path")
 
 module.exports = {
     mode: "development",
-    entry: "./src/sw.js",
+    entry: "./public/sw.js",
 
     output: {
         filename: "bundle.js",
-        path: path.join(__dirname, "dist/js")
+        path: path.join(__dirname, "public/js")
     },
 
     module: {

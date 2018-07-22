@@ -81,19 +81,20 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/sw.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./public/sw.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/sw.js":
-/*!*******************!*\
-  !*** ./src/sw.js ***!
-  \*******************/
+/***/ "./public/sw.js":
+/*!**********************!*\
+  !*** ./public/sw.js ***!
+  \**********************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("throw new Error(\"Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nError: ENOENT: no such file or directory, open '/Users/jay/Documents/GitHub/mws-restaurant-stage-1/src/sw.js'\");\n\n//# sourceURL=webpack:///./src/sw.js?");
+"use strict";
+eval("\n\n/*\nimport './css/yucky.css'\n*/\n\nvar restImgCache = 'rest-img';\nvar restCache = 'restaurant';\n\nself.addEventListener('install', function (event) {\n    event.waitUntil(caches.open(restCache).then(function (cache) {\n        return cache.addAll(['./', 'index.html', 'favicon.ico', 'js/idb.js', 'js/dbhelper.js', 'js/main.js', 'js/restaurant_info.js', 'restaurant.html', 'css/styles.css']);\n    }));\n});\n\nself.addEventListener('fetch', function (event) {\n    var requestUrl = new URL(event.request.url);\n    if (requestUrl.pathname.startsWith('/img/')) {\n        event.respondWith(showImg(event.request));\n        return;\n    }\n\n    if (requestUrl.pathname === '/') {\n        event.respondWith(caches.match('./'));\n        return;\n    }\n    /*   \n    */\n    event.respondWith(caches.match(event.request).then(function (response) {\n        if (response) {\n            return response;\n        }\n        return fetch(event.request);\n    }));\n});\n\nfunction showImg(request) {\n    var localImgName = request.url.replace(/-\\d+px\\.jpg$/, '');\n\n    return caches.open(restImgCache).then(function (cache) {\n        return cache.match(localImgName).then(function (response) {\n            if (response) {\n                return response;\n            }\n            return fetch(request).then(function (networkResponse) {\n                cache.put(localImgName, networkResponse.clone());\n                return networkResponse;\n            });\n        });\n    });\n}\n\n//# sourceURL=webpack:///./public/sw.js?");
 
 /***/ })
 
