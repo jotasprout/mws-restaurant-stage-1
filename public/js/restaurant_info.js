@@ -81,6 +81,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
 
+  // insert heart from fontawesome
+  // button to review restaurant
+
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
 
