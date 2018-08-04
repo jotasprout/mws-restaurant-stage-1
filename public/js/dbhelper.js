@@ -8,6 +8,9 @@ class DBHelper {
     return `http://localhost:${port}/restaurants`;
   };
 
+/* `http://localhost:1337/reviews/?restaurant_id=<restaurant_id>`  */
+
+
   /* NEW Fetch all restaurants. */
   
   static fetchRestaurants(callback) {
