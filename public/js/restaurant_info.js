@@ -126,6 +126,36 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
+fillReviewsHTML = (reviews = self.reviews) => {
+  const container = document.getElementById('reviews-container');
+
+  /* `http://localhost:1337/reviews/?restaurant_id=<restaurant_id>`  */
+
+  const title = document.createElement('h3');
+  title.innerHTML = 'Reviews';
+  container.appendChild(title);
+
+  if (!reviews) {
+    const noReviews = document.createElement('p');
+    noReviews.innerHTML = 'No reviews yet!';
+    container.appendChild(noReviews);
+    return;
+  }
+
+  const actionCall = document.createElement('a');
+  actionCall.innerHTML = 'Write a Review';
+  container.appendChild(actionCall);
+
+  const ul = document.getElementById('reviews-list');
+  reviews.forEach(review => {
+    ul.appendChild(createReviewHTML(review));
+  });
+  container.appendChild(ul);
+}
+
+/* 
+* OLD Create all reviews HTML and add them to the webpage 
+
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
 
@@ -150,6 +180,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   });
   container.appendChild(ul);
 }
+*/
 
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
