@@ -129,8 +129,6 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 fillReviewsHTML = (reviews = self.reviews) => {
   const container = document.getElementById('reviews-container');
 
-  /* `http://localhost:1337/reviews/?restaurant_id=<restaurant_id>`  */
-
   const title = document.createElement('h3');
   title.innerHTML = 'Reviews';
   container.appendChild(title);

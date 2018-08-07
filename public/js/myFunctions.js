@@ -1,59 +1,51 @@
 class DBHelper {
 
-/* Database URL */
-  static get DATABASE_URL() {
-    const port = 1337; // Change this to your server port
-    return `http://localhost:${port}/restaurants`;
-  };
-
-
   static fetchReviews(callback) {
     let dataSource;
     dataSource = DBHelper.DATABASE_URL;
 
     /* Creates local db, object store, and indexes for sorting */
-    const dbPromise = idb.open ('restaurant-db', 1, function (upgradeDb) {
-      const store = upgradeDb.createObjectStore('restaurant-store', {
+    const dbPromise = idb.open ('review-db', 1, function (upgradeDb) {
+      const store = upgradeDb.createObjectStore('review-store', {
         keyPath: 'id'
       });
-      store.createIndex('by-neighborhood', 'neighborhood');
-      store.createIndex('by-cuisine', 'cuisine_type');
+      store.createIndex('by-restaurant', 'restaurant');
     });
 
     dbPromise.then (function(db) {
-      var tx = db.transaction('restaurant-store', 'readwrite');
-      var res = tx.objectStore('restaurant-store');
+      var tx = db.transaction('review-store', 'readwrite');
+      var res = tx.objectStore('review-store');
       return res.getAll();
-    }).then(function(restaurants) {
-      // if any restaurants are returned from local db call them back
-      if (restaurants.length !==0){
-        callback(null, restaurants);
+    }).then(function(reviews) {
+      // if any reviews are returned from local db call them back
+      if (reviews.length !==0){
+        callback(null, reviews);
       } else {
-        // if no restaurants were returned from local db fetch restaurants from server
-        fetch (`${DBHelper.DATABASE_URL}`)
+        // if no reviews were returned from local db fetch reviews from server
+        fetch (`http://localhost:1337/reviews/`)
         .then(function(response) {
           return response.json();
         })
-        .then(function(restaurants) {
-          // put restaurants from server into local db
+        .then(function(reviews) {
+          // put reviews from server into local db
           dbPromise.then(function(db){
-            var tx = db.transaction('restaurant-store', 'readwrite');
-            var res = tx.objectStore('restaurant-store');
-            restaurants.forEach(
-              restaurant => res.put(restaurant)
+            var tx = db.transaction('review-store', 'readwrite');
+            var res = tx.objectStore('review-store');
+            reviews.forEach(
+              review => res.put(review)
             ); 
-            callback(null, restaurants);
+            callback(null, reviews);
             return tx.complete; 
           });
 
           });
       }
     }).then(function(){
-        console.log("added restaurants");
+        console.log("added reviews");
       }).catch(function(error){
         console.log(error);
       }); // end of dbPromise.then       
 
-  } // end of fetchRestaurants
+  } // end of fetchReviews
 
 }
