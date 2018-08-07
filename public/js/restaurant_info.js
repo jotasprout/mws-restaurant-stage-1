@@ -70,6 +70,7 @@ fetchRestaurantFromURL = (callback) => {
         console.error(error);
         return;
       }
+      
       fillRestaurantHTML();
       callback(null, restaurant)
     });
@@ -99,28 +100,11 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
+  // get reviews
+  DBHelper.fetchReviewsByRestaurant(restaurant);
+
   // fill reviews
   fillReviewsHTML();
-}
-
-/**
- * Create restaurant operating hours HTML table and add it to the webpage.
- */
-fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
-  const hours = document.getElementById('restaurant-hours');
-  for (let key in operatingHours) {
-    const row = document.createElement('tr');
-
-    const day = document.createElement('td');
-    day.innerHTML = key;
-    row.appendChild(day);
-
-    const time = document.createElement('td');
-    time.innerHTML = operatingHours[key];
-    row.appendChild(time);
-
-    hours.appendChild(row);
-  }
 }
 
 /**
@@ -149,6 +133,26 @@ fillReviewsHTML = (reviews = self.reviews) => {
     ul.appendChild(createReviewHTML(review));
   });
   container.appendChild(ul);
+}
+
+/**
+ * Create restaurant operating hours HTML table and add it to the webpage.
+ */
+fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
+  const hours = document.getElementById('restaurant-hours');
+  for (let key in operatingHours) {
+    const row = document.createElement('tr');
+
+    const day = document.createElement('td');
+    day.innerHTML = key;
+    row.appendChild(day);
+
+    const time = document.createElement('td');
+    time.innerHTML = operatingHours[key];
+    row.appendChild(time);
+
+    hours.appendChild(row);
+  }
 }
 
 /* 
