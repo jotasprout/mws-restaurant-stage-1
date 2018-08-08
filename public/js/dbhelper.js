@@ -105,6 +105,19 @@ class DBHelper {
     });
   }
 
+  static fetchReviewsByRestaurant(restaurant, callback) {
+    // Fetch all reviews with proper error handling
+    DBHelper.fetchReviews((error, reviews) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        // Filter reviews for only one restaurant
+        const results = reviews.filter(r => r.restaurant_id == restaurant);
+        callback(null, results);
+      }
+    });
+  }  
+
   /* Fetch restaurants by a cuisine and a neighborhood with proper error handling. */
   static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
     // Fetch all restaurants
@@ -232,17 +245,6 @@ class DBHelper {
 
   } // end of fetchReviews
 
-  static fetchReviewsByRestaurant(restaurant, callback) {
-    // Fetch all reviews with proper error handling
-    DBHelper.fetchReviews((error, reviews) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        // Filter reviews for only one restaurant
-        const reviews = reviews.filter(r => r.restaurant_id == restaurant);
-        callback(null, results);
-      }
-    });
-  }  
+
 
 }
