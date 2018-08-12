@@ -66,9 +66,14 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
 
-  // heart from fontawesome
+  // heart favorite
   const heart = document.getElementById('heart');
-  // cuisine.innerHTML = restaurant.cuisine_type;
+  const stateOfHeart = restaurant.is_favorite;
+  if (stateOfHeart == false) {
+    heart.setAttribute('class', 'fas fa-heart whiteQueen');
+  } else {
+    heart.setAttribute('class', 'fas fa-heart redQueen');
+  }
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
@@ -217,9 +222,14 @@ getParameterByName = (name, url) => {
 }
 
 const heart = document.getElementById("heart");
-
-heart.on("click", changeOfHeart);
+heart.onclick = changeOfHeart;
 
 function changeOfHeart () {
+  // const heart = document.getElementById("heart");
   const currentClass = heart.getAttribute("class");
+  if (currentClass == 'fas fa-heart whiteQueen') {
+    heart.setAttribute('class', 'fas fa-heart redQueen');
+  } else {
+    heart.setAttribute('class', 'fas fa-heart whiteQueen');
+  }
 }
