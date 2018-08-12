@@ -119,10 +119,11 @@ const fillReviewsHTML = (reviews = self.reviews) => {
   }
 
   // button to review restaurant
-
+  const writeReview = document.createElement('p');
   const actionCall = document.createElement('a');
   actionCall.innerHTML = 'Write a Review';
-  container.appendChild(actionCall);
+  writeReview.appendChild(actionCall);
+  container.appendChild(writeReview);
 
   const ul = document.getElementById('reviews-list');
   reviews.forEach(review => {

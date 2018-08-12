@@ -225,6 +225,9 @@ header h1 a {
   padding: 10px 0px 0px;
   width: 100%;
 }
+#reviews-container a {
+  margin: 0 0 20px;
+}
 #reviews-list {
   margin: 0;
   padding: 0;
