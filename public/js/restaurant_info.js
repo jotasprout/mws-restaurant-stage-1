@@ -34,22 +34,6 @@ initMap = () => {
     }
   });
 }  
- 
-/* window.initMap = () => {
-  fetchRestaurantFromURL((error, restaurant) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      self.map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: restaurant.latlng,
-        scrollwheel: false
-      });
-      fillBreadcrumb();
-      DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
-    }
-  });
-} */
 
 /**
  * Get current restaurant from page URL.
@@ -101,16 +85,20 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
   // get reviews
-  DBHelper.fetchReviewsByRestaurant(restaurant);
-
-  // fill reviews
-  fillReviewsHTML();
+  DBHelper.fetchReviewsByRestaurant(restaurant, (error, reviews) => {
+    if (error) {
+      console.error(error);
+    } else {
+      fillReviewsHTML(reviews);
+    }
+  });
+  
 }
 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = (reviews = self.reviews) => {
+const fillReviewsHTML = (reviews = self.reviews) => {
   const container = document.getElementById('reviews-container');
 
   const title = document.createElement('h3');
@@ -154,35 +142,6 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
     hours.appendChild(row);
   }
 }
-
-/* 
-* OLD Create all reviews HTML and add them to the webpage 
-
-fillReviewsHTML = (reviews = self.restaurant.reviews) => {
-  const container = document.getElementById('reviews-container');
-
-  const title = document.createElement('h3');
-  title.innerHTML = 'Reviews';
-  container.appendChild(title);
-
-  if (!reviews) {
-    const noReviews = document.createElement('p');
-    noReviews.innerHTML = 'No reviews yet!';
-    container.appendChild(noReviews);
-    return;
-  }
-
-  const actionCall = document.createElement('a');
-  actionCall.innerHTML = 'Write a Review';
-  container.appendChild(actionCall);
-
-  const ul = document.getElementById('reviews-list');
-  reviews.forEach(review => {
-    ul.appendChild(createReviewHTML(review));
-  });
-  container.appendChild(ul);
-}
-*/
 
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
@@ -236,16 +195,6 @@ createReviewHTML = (review) => {
 
   return li;
 }
-
-/* Add restaurant name to the breadcrumb navigation menu
-fillBreadcrumb = (restaurant=self.restaurant) => {
-  const breadcrumb = document.getElementById('breadcrumb');
-  const li = document.createElement('li');
-  li.innerHTML = restaurant.name;
-  breadcrumb.appendChild(li);
-}
- */
-
 
 /**
  * Get a parameter by name from page URL.

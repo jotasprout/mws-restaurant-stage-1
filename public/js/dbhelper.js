@@ -2,12 +2,6 @@
 
 class DBHelper {
 
-  /* Database URL */
-  static get DATABASE_URL() {
-    const port = 1337; // Change this to your server port
-    return `http://localhost:${port}/restaurants`;
-  };
-
   /* NEW Fetch all restaurants. */
   
   static fetchRestaurants(callback) {
@@ -33,7 +27,7 @@ class DBHelper {
         callback(null, restaurants);
       } else {
         // if no restaurants were returned from local db fetch restaurants from server
-        fetch (`${DBHelper.DATABASE_URL}`)
+        fetch (`http://localhost:1337/restaurants`)
         .then(function(response) {
           return response.json();
         })
@@ -75,48 +69,7 @@ class DBHelper {
         }
       }
     });
-  }
-
-    /* Fetch restaurants by a cuisine type with proper error handling. */
-  static fetchRestaurantByCuisine(cuisine, callback) {
-    // Fetch all restaurants  with proper error handling
-    DBHelper.fetchRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        // Filter restaurants to have only given cuisine type
-        const results = restaurants.filter(r => r.cuisine_type == cuisine);
-        callback(null, results);
-      }
-    });
-  }
-
-  /* Fetch restaurants by a neighborhood with proper error handling. */
-  static fetchRestaurantByNeighborhood(neighborhood, callback) {
-    // Fetch all restaurants
-    DBHelper.fetchRestaurants((error, restaurants) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        // Filter restaurants to have only given neighborhood
-        const results = restaurants.filter(r => r.neighborhood == neighborhood);
-        callback(null, results);
-      }
-    });
-  }
-
-  static fetchReviewsByRestaurant(restaurant, callback) {
-    // Fetch all reviews with proper error handling
-    DBHelper.fetchReviews((error, reviews) => {
-      if (error) {
-        callback(error, null);
-      } else {
-        // Filter reviews for only one restaurant
-        const results = reviews.filter(r => r.restaurant_id == restaurant);
-        callback(null, results);
-      }
-    });
-  }  
+  } 
 
   /* Fetch restaurants by a cuisine and a neighborhood with proper error handling. */
   static fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, callback) {
@@ -245,6 +198,17 @@ class DBHelper {
 
   } // end of fetchReviews
 
-
+  static fetchReviewsByRestaurant(restaurant, callback) {
+    // Fetch all reviews with proper error handling
+    DBHelper.fetchReviews((error, reviews) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        // Filter reviews for only one restaurant
+        let results = reviews.filter(r => r.restaurant_id == restaurant);
+        callback(null, results);
+      }
+    });
+  } 
 
 }
