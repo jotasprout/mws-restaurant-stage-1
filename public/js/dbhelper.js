@@ -192,7 +192,6 @@ class DBHelper {
             callback(null, reviews);
             return tx.complete; 
           });
-
         });
       }
     }).then(function(){
@@ -200,7 +199,6 @@ class DBHelper {
       }).catch(function(error){
         console.log(error);
       }); // end of dbPromise.then       
-
   } // end of fetchReviews
 
   static fetchReviewsByRestaurant(restid, callback) {
@@ -213,11 +211,12 @@ class DBHelper {
         callback(error, null);
       } else {
         // Filter reviews for only one restaurant
-        let results = reviews.filter(r => r.restaurant_id == restid);
-        
+        let results = reviews.filter(r => r.restaurant_id == restid);       
         callback(null, results);
       }
     });
   } 
+
+
 
 }

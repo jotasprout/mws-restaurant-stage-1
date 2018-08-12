@@ -38,10 +38,12 @@ module.exports = {
             port: 8000,
             /* 
             either this
-            server: { baseDir: ["public"]}
-            or this
             */
+            server: { baseDir: ["public"]}
+            /*
+            or this
             proxy: "http://localhost:8080"
+            */
         })
     ]
 }

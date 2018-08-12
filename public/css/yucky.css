@@ -1,3 +1,15 @@
+#heart {
+    font-size: 14pt;
+}
+
+.redQueen {
+    color: red;
+}
+
+.whiteQueen {
+    color: white;
+}
+
 .modal {
     position: fixed;
     left: 0;

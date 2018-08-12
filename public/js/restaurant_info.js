@@ -66,8 +66,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
 
-  // insert heart from fontawesome
-  // button to review restaurant
+  // heart from fontawesome
+  const heart = document.getElementById('heart');
+  // cuisine.innerHTML = restaurant.cuisine_type;
 
   const address = document.getElementById('restaurant-address');
   address.innerHTML = restaurant.address;
@@ -76,9 +77,6 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.className = 'restaurant-img'
   image.alt = DBHelper.altTextForRestaurantImage(restaurant);
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-
-  // const cuisine = document.getElementById('restaurant-cuisine');
-  // cuisine.innerHTML = restaurant.cuisine_type;
 
   // fill operating hours
   if (restaurant.operating_hours) {
@@ -114,6 +112,8 @@ const fillReviewsHTML = (reviews = self.reviews) => {
     container.appendChild(noReviews);
     return;
   }
+
+  // button to review restaurant
 
   const actionCall = document.createElement('a');
   actionCall.innerHTML = 'Write a Review';
@@ -214,4 +214,12 @@ getParameterByName = (name, url) => {
   if (!results[2])
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+const heart = document.getElementById("heart");
+
+heart.on("click", changeOfHeart);
+
+function changeOfHeart () {
+  const currentClass = heart.getAttribute("class");
 }

@@ -177,8 +177,8 @@ header h1 a {
   display: inline-block;
   font-size: 11pt;
   font-weight: 700;
-  margin: 15px 0 0;
-  width: 100%;
+  margin: 15px 0 0 40px;
+  width: 85%;
   padding: 8px 0px 10px;
   text-align: center;
   text-decoration: none;
