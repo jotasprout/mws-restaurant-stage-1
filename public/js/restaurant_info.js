@@ -118,9 +118,43 @@ const fillReviewsHTML = (reviews = self.reviews) => {
 
   const ul = document.getElementById('reviews-list');
   reviews.forEach(review => {
+    console.log(review);
     ul.appendChild(createReviewHTML(review));
   });
   container.appendChild(ul);
+}
+
+/**
+ * Create review HTML and add it to the webpage.
+ */
+createReviewHTML = (review) => {
+  const li = document.createElement('li');
+
+  const reviewtop = document.createElement('div');
+  reviewtop.className = 'review-top';
+  li.appendChild(reviewtop);
+
+  const name = document.createElement('div');
+  name.className = 'review-name';
+  name.innerHTML = review.name;
+  reviewtop.appendChild(name);
+
+  const date = document.createElement('div');
+  date.className = 'review-date';
+  date.innerHTML = review.date;
+  reviewtop.appendChild(date);
+
+  const rating = document.createElement('div');
+  rating.className = 'review-rating';
+  rating.innerHTML = `Rating: ${review.rating}`;
+  li.appendChild(rating);
+
+  const comments = document.createElement('div');
+  comments.className = 'review-comments';
+  comments.innerHTML = review.comments;
+  li.appendChild(comments);
+
+  return li;
 }
 
 /**
@@ -161,39 +195,6 @@ fillWriteReviewHTML = (operatingHours = self.restaurant.operating_hours) => {
 
     hours.appendChild(row);
   }
-}
-
-/**
- * Create review HTML and add it to the webpage.
- */
-createReviewHTML = (review) => {
-  const li = document.createElement('li');
-
-  const reviewtop = document.createElement('div');
-  reviewtop.className = 'review-top';
-  li.appendChild(reviewtop);
-
-  const name = document.createElement('div');
-  name.className = 'review-name';
-  name.innerHTML = review.name;
-  reviewtop.appendChild(name);
-
-  const date = document.createElement('div');
-  date.className = 'review-date';
-  date.innerHTML = review.date;
-  reviewtop.appendChild(date);
-
-  const rating = document.createElement('div');
-  rating.className = 'review-rating';
-  rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
-
-  const comments = document.createElement('div');
-  comments.className = 'review-comments';
-  comments.innerHTML = review.comments;
-  li.appendChild(comments);
-
-  return li;
 }
 
 /**
