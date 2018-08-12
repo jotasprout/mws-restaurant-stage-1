@@ -174,12 +174,15 @@ class DBHelper {
         // if no reviews were returned from local db fetch reviews from server
         fetch (`http://localhost:1337/reviews/`)
         .then(function(response) {
-          
+          // const snot = response.json();
+          // console.log(snot);
           return response.json();
+          
         })
         .then(function(reviews) {
           // put reviews from server into local db
-          console.log(reviews);
+          // console.log(reviews);
+          // the above works
           dbPromise.then(function(db){
             var tx = db.transaction('review-store', 'readwrite');
             var res = tx.objectStore('review-store');
@@ -190,7 +193,7 @@ class DBHelper {
             return tx.complete; 
           });
 
-          });
+        });
       }
     }).then(function(){
         console.log("added reviews");
@@ -200,15 +203,17 @@ class DBHelper {
 
   } // end of fetchReviews
 
-  static fetchReviewsByRestaurant(restaurant, callback) {
-    
+  static fetchReviewsByRestaurant(restid, callback) {
+    console.log(restid);
     // Fetch all reviews with proper error handling
     DBHelper.fetchReviews((error, reviews) => {
+      // console.log(reviews);
+      // the above works
       if (error) {
         callback(error, null);
       } else {
         // Filter reviews for only one restaurant
-        let results = reviews.filter(r => r.restaurant_id == restaurant);
+        let results = reviews.filter(r => r.restaurant_id == restid);
         
         callback(null, results);
       }

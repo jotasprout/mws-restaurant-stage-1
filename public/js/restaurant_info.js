@@ -84,8 +84,11 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
+
   // get reviews
-  DBHelper.fetchReviewsByRestaurant(restaurant, (error, reviews) => {
+  const restid = restaurant.id;
+  DBHelper.fetchReviewsByRestaurant(restid, (error, reviews) => {
+
     if (error) {
       console.error(error);
     } else {
