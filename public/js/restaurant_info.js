@@ -88,8 +88,51 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
 
-  // get reviews
   const restid = restaurant.id;
+
+  const hiddenField = document.getElementById('restaurant_id');
+  hiddenField.setAttribute('value', `${restaurant.id}`);
+
+  const reviewForm = document.getElementById('reviewForm').addEventListener('submit', submitData);
+
+  function submitData (event) {
+
+      event.preventDefault();
+
+      // let restaurant_id = restid;
+      let restaurant_id = document.getElementById('restaurant_id').value;
+      let name = document.getElementById('name').value;
+      let rating = document.getElementById('rating').value;
+      let comments = document.getElementById('comments').value;
+
+      const reviewContent = {
+          restaurant_id,
+          name,
+          rating,
+          comments
+      };
+
+      const reviewOptions = {
+          method: 'POST',
+          body: JSON.stringify(reviewContent),
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      };
+
+      const url = 'http://localhost:1337/reviews/';
+
+      fetch(url, reviewOptions)
+      .then((res) => console.log(res.json()))
+      .then((data) => console.log(data))
+      .catch((err) => console.log (err));
+
+  };
+/*
+*/
+
+  // get reviews
+
   DBHelper.fetchReviewsByRestaurant(restid, (error, reviews) => {
 
     if (error) {

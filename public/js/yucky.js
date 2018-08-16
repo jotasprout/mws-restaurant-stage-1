@@ -1,46 +1,39 @@
-// this
-const myForm = document.getElementById('reviewForm');
-reviewContent = new FormData(myForm);
+const reviewForm = document.getElementById('reviewForm').addEventListener('submit', submitData);
 
-// or this
+function submitData (event) {
 
-const reviewForm = document.getElementById('reviewForm');
+    event.preventDefault();
 
-reviewForm.addEventListener('submit', function(event) {
+    let restaurant_id = restid;
+    let name = document.getElementById('name').value;
+    let rating = document.getElementById('rating').value;
+    let comments = document.getElementById('comments').value;
 
-    // next few lines prolly not needed
-    // replace with below functions & shizzle
-    const reviewContent = new FormData();
+    const reviewContent = {
+        restaurant_id,
+        name,
+        rating,
+        comments
+    };
 
-    for (var i=0; i < reviewForm.length; i++) {
-        formData.append(reviewForm[i].name, reviewForm[i].value);
-    }
+    const reviewOptions = {
+        method: 'POST',
+        body: JSON.stringify(reviewContent),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
 
-});
+    const url = 'http://localhost:1337/reviews/';
+
+    fetch(url, reviewOptions)
+    .then((res) => console.log(res.json()))
+    .then((data) => console.log(data))
+    .catch((err) => console.log (err));
+
+};
 
 /*
-const reviewContent = {
-    restaurant_id,
-    name,
-    rating,
-    comments
-};
 */
 
-const reviewOptions = {
-    method: 'POST',
-    body: JSON.stringify(reviewContent),
-    headers: {
-        'Content-Type': 'application/json'
-    }
-}
-
-const url = 'http://localhost:1337/reviews/';
-
-const responsePromise = fetch(url, reviewOptions);
-
-responsePromise
-    .then(res => res.json())
-    .then(res => console.log(res));
-
-event.preventDefault();    
+  

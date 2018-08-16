@@ -58,11 +58,31 @@
                   <!-- Beginning reviews -->
             <div id="reviews-container">
               <form method="POST" action="" id="reviewForm">
-                <input type="hidden" name="restaurant_id" value="">
-                <label>Name: <input type="text" name="name"></label>
-                <!-- rating needs required="required" -->
-                <label>Comments: <input type="textarea" rows="5" name="comments"></label>
-                <input type="submit" value="submit">
+                <input type="hidden" id="restaurant_id" name="restaurant_id" value="">
+                <p>
+                    <label>Name: <input type="text" id="name" name="name"></label>
+                </p>
+                <p>
+                  <!-- rating needs required="required" -->
+                  <label for="rating">Rating</label>
+                  <select id="rating">
+                    <option value="">Rate This Place</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </p>
+                <p>
+                    <label>Comments: <input type="textarea" rows="5" id="comments" name="comments"></label>
+                </p>
+                <p>
+                    <input type="submit" value="submit">
+                </p>
+                
+                
+
               </form>
               <div id="results"></div>
               <ul id="reviews-list"></ul>
@@ -91,7 +111,10 @@
   <script type="application/javascript" charset="utf-8" src="js/dbhelper.js"></script>
   <!-- Main javascript file -->
   <script type="application/javascript" charset="utf-8" src="js/restaurant_info.js"></script>
-  <script type="application/javascript" charset="utf-8" src="js/yucky.js"></script>
+  <!--  
+    <script type="application/javascript" charset="utf-8" src="js/yucky.js"></script>
+  -->
+  
   <!-- End scripts -->
 
 </body>
