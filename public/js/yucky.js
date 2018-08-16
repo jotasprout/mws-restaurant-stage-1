@@ -1,22 +1,31 @@
-const reviewForm = documents.getElementById('reviewForm');
+// this
+const myForm = document.getElementById('reviewForm');
+reviewContent = new FormData(myForm);
+
+// or this
+
+const reviewForm = document.getElementById('reviewForm');
 
 reviewForm.addEventListener('submit', function(event) {
 
     // next few lines prolly not needed
     // replace with below functions & shizzle
-    const formData = new FormData();
+    const reviewContent = new FormData();
+
     for (var i=0; i < reviewForm.length; i++) {
         formData.append(reviewForm[i].name, reviewForm[i].value);
     }
 
 });
 
+/*
 const reviewContent = {
     restaurant_id,
     name,
     rating,
     comments
 };
+*/
 
 const reviewOptions = {
     method: 'POST',
