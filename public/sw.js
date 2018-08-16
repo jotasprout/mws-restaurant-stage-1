@@ -1,7 +1,3 @@
-/*
-import './css/yucky.css'
-*/
-
 const restImgCache = 'rest-img';
 const restCache = 'restaurant';
 
@@ -12,9 +8,6 @@ self.addEventListener('install', function(event) {
                 './',
                 'index.html',
                 'favicon.ico',
-                /*
-                'js/idb.js',
-                */
                 'js/dbhelper.js',
                 'js/main.js',
                 'js/restaurant_info.js',

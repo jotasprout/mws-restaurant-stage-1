@@ -159,7 +159,7 @@ class DBHelper {
       const store = upgradeDb.createObjectStore('review-store', {
         keyPath: 'id'
       });
-      store.createIndex('by-restaurant', 'restaurant');
+      store.createIndex('by-restaurant', 'restaurant_id');
     });
 
     dbPromise.then (function(db) {
@@ -174,15 +174,12 @@ class DBHelper {
         // if no reviews were returned from local db fetch reviews from server
         fetch (`http://localhost:1337/reviews/`)
         .then(function(response) {
-          // const snot = response.json();
-          // console.log(snot);
           return response.json();
           
         })
         .then(function(reviews) {
           // put reviews from server into local db
-          // console.log(reviews);
-          // the above works
+
           dbPromise.then(function(db){
             var tx = db.transaction('review-store', 'readwrite');
             var res = tx.objectStore('review-store');
@@ -216,7 +213,5 @@ class DBHelper {
       }
     });
   } 
-
-
 
 }
