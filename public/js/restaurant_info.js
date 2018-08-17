@@ -88,10 +88,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     fillRestaurantHoursHTML();
   }
 
-  const restid = restaurant.id;
+  const restid = parseInt(restaurant.id, 10);
 
   const hiddenField = document.getElementById('restaurant_id');
-  hiddenField.setAttribute('value', `${restaurant.id}`);
+  hiddenField.setAttribute('value', restid);
 
   const reviewForm = document.getElementById('reviewForm').addEventListener('submit', submitData);
 
@@ -111,12 +111,15 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
           rating,
           comments
       };
+	  
+    // console.log(reviewContent.restaurant_id);
+    // above broke it
 
       const reviewOptions = {
           method: 'POST',
           body: JSON.stringify(reviewContent),
           headers: {
-              'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
           }
       };
 
@@ -124,15 +127,13 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
       fetch(url, reviewOptions)
       .then((res) => console.log(res.json()))
-      .then((data) => console.log(data))
       .catch((err) => console.log (err));
 
-  };
-/*
-*/
+  }; // end of submitData
+	
+/*  */
 
-  // get reviews
-
+  // get reviews for this restaurant
   DBHelper.fetchReviewsByRestaurant(restid, (error, reviews) => {
 
     if (error) {
@@ -142,11 +143,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     }
   });
   
-}
+} // end of fillRestaurantHTML
 
-/**
- * Create all reviews HTML and add them to the webpage.
- */
+/* Create all reviews HTML and add them to the webpage.*/
 const fillReviewsHTML = (reviews = self.reviews) => {
   const container = document.getElementById('reviews-container');
 
