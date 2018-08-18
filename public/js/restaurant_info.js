@@ -73,7 +73,6 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     heart.setAttribute('class', 'fas fa-heart whiteQueen');
   } else {
     heart.setAttribute('class', 'fas fa-heart redQueen');
-    // put a true in the favorite
   }
 
   const address = document.getElementById('restaurant-address');
@@ -209,9 +208,7 @@ createReviewHTML = (review) => {
   return li;
 }
 
-/**
- * Create restaurant operating hours HTML table and add it to the webpage.
- */
+/* Create restaurant operating hours HTML table and add it to the webpage. */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
   for (let key in operatingHours) {
