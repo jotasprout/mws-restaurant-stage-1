@@ -54,6 +54,7 @@ fetchRestaurantFromURL = (callback) => {
         console.error(error);
         return;
       }
+      console.log(restaurant);
       
       fillRestaurantHTML();
       callback(null, restaurant)
@@ -61,6 +62,7 @@ fetchRestaurantFromURL = (callback) => {
   }
 }
 
+let stateOfHeart;
 /* Create restaurant HTML and add it to the webpage */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
@@ -68,7 +70,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
   // heart favorite
   const heart = document.getElementById('heart');
-  const stateOfHeart = restaurant.is_favorite;
+
+  stateOfHeart = restaurant.is_favorite;
+  console.log ("stateOfHeart on page load is " + stateOfHeart);
+
   if (stateOfHeart == false) {
     heart.setAttribute('class', 'fas fa-heart whiteQueen');
   } else {
@@ -254,20 +259,31 @@ getParameterByName = (name, url) => {
 const heart = document.getElementById("heart");
 heart.onclick = changeOfHeart;
 
-function changeOfHeart () {
+function changeOfHeart (restaurant) {
 
-  const restid = restaurant.id;
-  const stateOfHeart = restaurant.is_favorite;
+  const restid = getParameterByName('id');
+  console.log (restid);
+
+  // const restid = restaurant.id;
+  // let stateOfHeart = restaurant.is_favorite;
+  // console.log (stateOfHeart)
 
   if (stateOfHeart == false) {
     stateOfHeart = true;
+    console.log ("stateOfHeart changed to " + stateOfHeart);
     heart.setAttribute('class', 'fas fa-heart redQueen');
   } else {
     stateOfHeart = false;
+    console.log ("stateOfHeart changed to " + stateOfHeart);
     heart.setAttribute('class', 'fas fa-heart whiteQueen');
   }
   
   const furl = `http://localhost:1337/restaurants/${restid}/?is_favorite=${stateOfHeart}`;
-  fetch (furl);
+
+  const faveOptions = {
+    method: 'POST'
+  }
+
+  fetch (furl, faveOptions);
 
 }

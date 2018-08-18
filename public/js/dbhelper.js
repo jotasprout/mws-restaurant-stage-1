@@ -5,8 +5,10 @@ class DBHelper {
   /* NEW Fetch all restaurants. */
   
   static fetchRestaurants(callback) {
-    let dataSource;
-    dataSource = DBHelper.DATABASE_URL;
+    // let dataSource;
+    // commented out above because datasource is declared but never read
+    // dataSource = DBHelper.DATABASE_URL;
+    // commented out above because I don't think line 32 or anyplace else uses it
 
     /* Creates local db, object store, and indexes for sorting */
     const dbPromise = idb.open ('restaurant-db', 1, function (upgradeDb) {
@@ -192,14 +194,14 @@ class DBHelper {
         });
       }
     }).then(function(){
-        console.log("added reviews");
+        // console.log("added reviews");
       }).catch(function(error){
         console.log(error);
       }); // end of dbPromise.then       
   } // end of fetchReviews
 
   static fetchReviewsByRestaurant(restid, callback) {
-    console.log(restid);
+    // console.log(restid);
     // Fetch all reviews with proper error handling
     DBHelper.fetchReviews((error, reviews) => {
       // console.log(reviews);
