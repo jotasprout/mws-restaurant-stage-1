@@ -214,24 +214,4 @@ class DBHelper {
     });
   } 
 
-  
-
-  static faveUrl (restaurant, callback) {
-
-    const restid = restaurant.id;
-    const stateOfHeart = restaurant.is_favorite;
-
-    if (stateOfHeart == false) {
-      stateOfHeart = true;
-    } else {
-      stateOfHeart = false;
-    }
-
-    const furl = `http://localhost:1337/restaurants/${restid}/?is_favorite=${stateOfHeart}`;
-
-    callback (furl);
-
-  }
-
-
 }

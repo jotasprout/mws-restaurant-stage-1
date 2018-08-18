@@ -111,9 +111,6 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
           rating,
           comments
       };
-	  
-    // console.log(reviewContent.restaurant_id);
-    // above broke it
 
       const reviewOptions = {
           method: 'POST',
@@ -130,10 +127,8 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
       .catch((err) => console.log (err));
 
   }; // end of submitData
-	
-/*  */
 
-  // get reviews for this restaurant
+  // fetching reviews for this restaurant
   DBHelper.fetchReviewsByRestaurant(restid, (error, reviews) => {
 
     if (error) {
@@ -141,7 +136,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     } else {
       fillReviewsHTML(reviews);
     }
-  });
+  }); // end of fetching reviews for this restaurant
   
 } // end of fillRestaurantHTML
 
@@ -175,9 +170,7 @@ const fillReviewsHTML = (reviews = self.reviews) => {
   container.appendChild(ul);
 }
 
-/**
- * Create review HTML and add it to the webpage.
- */
+/* Create review HTML and add it to the webpage. */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
 
@@ -206,7 +199,7 @@ createReviewHTML = (review) => {
   li.appendChild(comments);
 
   return li;
-}
+} // end of createReviewHTML
 
 /* Create restaurant operating hours HTML table and add it to the webpage. */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
@@ -224,7 +217,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 
     hours.appendChild(row);
   }
-}
+} // end of fillRestaurantHoursHTML
 
 /* Create restaurant operating hours HTML table and add it to the webpage. */
 fillWriteReviewHTML = (operatingHours = self.restaurant.operating_hours) => {
@@ -262,11 +255,19 @@ const heart = document.getElementById("heart");
 heart.onclick = changeOfHeart;
 
 function changeOfHeart () {
-  // const heart = document.getElementById("heart");
-  const currentClass = heart.getAttribute("class");
-  if (currentClass == 'fas fa-heart whiteQueen') {
+
+  const restid = restaurant.id;
+  const stateOfHeart = restaurant.is_favorite;
+
+  if (stateOfHeart == false) {
+    stateOfHeart = true;
     heart.setAttribute('class', 'fas fa-heart redQueen');
   } else {
+    stateOfHeart = false;
     heart.setAttribute('class', 'fas fa-heart whiteQueen');
   }
+  
+  const furl = `http://localhost:1337/restaurants/${restid}/?is_favorite=${stateOfHeart}`;
+  fetch (furl);
+
 }
