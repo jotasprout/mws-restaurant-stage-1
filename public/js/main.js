@@ -5,14 +5,27 @@ var map;
 var markers = [];
 
 /* Fetch neighborhoods and cuisines as soon as the page is loaded. */
-
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
+  initMap();
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('../sw.js', {
+      scope: './'
+    }).then(function(reg) {
+      if ('sync' in reg) {
+        console.log("Sync is supported here");
+      } else {
+        console.log("Sync is NOT supported here");
+      }
+    }).catch(function(err) {
+      console.error(err);
+    });
+  }
+
 });
 
 /* Fetch all neighborhoods and set their HTML */
-
 const fetchNeighborhoods = () => {
   DBHelper.fetchNeighborhoods((error, neighborhoods) => {
     if (error) { // Got an error
@@ -25,7 +38,6 @@ const fetchNeighborhoods = () => {
 };
 
 /* Set neighborhoods HTML */
-
 const fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   const select = document.getElementById('neighborhoods-select');
   neighborhoods.forEach(neighborhood => {
@@ -38,7 +50,6 @@ const fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
 };
 
 /* Fetch all cuisines and set their HTML. */
-
 fetchCuisines = () => {
   DBHelper.fetchCuisines((error, cuisines) => {
     if (error) { // Got an error!
@@ -51,7 +62,6 @@ fetchCuisines = () => {
 }
 
 /* Set cuisines HTML. */
-
 fillCuisinesHTML = (cuisines = self.cuisines) => {
   const select = document.getElementById('cuisines-select');
 
@@ -64,14 +74,7 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
   });
 }
 
-/* Initialize map as soon as the page is loaded. */
-
-document.addEventListener('DOMContentLoaded', (event) => {  
-  initMap();
-});
-
 /* Initialize leaflet map, called from HTML. */
-
 initMap = () => {
   self.newMap = L.map('map', {
         center: [40.722216, -73.987501],

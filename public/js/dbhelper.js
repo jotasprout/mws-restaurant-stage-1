@@ -158,10 +158,17 @@ class DBHelper {
 
     /* Creates local db, object store, and indexes for sorting */
     const dbPromise = idb.open ('review-db', 1, function (upgradeDb) {
-      const store = upgradeDb.createObjectStore('review-store', {
+
+      const reviewStore = upgradeDb.createObjectStore('review-store', {
         keyPath: 'id'
       });
-      store.createIndex('by-restaurant', 'restaurant_id');
+      reviewStore.createIndex('by-restaurant', 'restaurant_id');
+
+      const reviewOutbox = upgradeDb.createObjectStore('review-outbox', {
+        keyPath: 'outboxID'
+      });
+      reviewOutbox.createIndex('by-restaurant', 'restaurant_id');
+
     });
 
     dbPromise.then (function(db) {
@@ -197,7 +204,20 @@ class DBHelper {
         // console.log("added reviews");
       }).catch(function(error){
         console.log(error);
-      }); // end of dbPromise.then       
+      }); // end of dbPromise.then  
+    
+    dbPromise.then (function(db) {
+      var tx = db.transaction('review-outbox', 'readwrite');
+      var res = tx.objectStore('review-outbox');
+      return res.getAll();
+    }).then(function(outboxReviews) {
+      if (outboxReviews.length !==0){
+        // if length isn't zero ... something needs to send the reviews that are there
+        callback(null, outboxReviews);
+      } else {
+        // a fetch with put and options and stuff ... wait ... this should go under IF, correct?
+      }
+    });
   } // end of fetchReviews
 
   static fetchReviewsByRestaurant(restid, callback) {
@@ -215,10 +235,10 @@ class DBHelper {
       }
     });
   } 
-
+/*
   static manageOfflineReviews(callback) {
 
-    /* Creates local db and object store for reviews written offline */
+    // Creates local db and object store for reviews written offline 
     const dbPromise = idb.open ('review-db', 1, function (upgradeDb) {
       const store = upgradeDb.createObjectStore('offlineReviews-store', {
         keyPath: 'id'
@@ -235,11 +255,11 @@ class DBHelper {
         callback(null, reviews);
       } else {
         // if no reviews were returned from local db fetch reviews from server
-        /*
+        
         fetch (`http://localhost:1337/reviews/`)
         .then(function(response) {
           return response.json();
-          */
+          
         })
         .then(function(reviews) {
           // put reviews from server into local db
@@ -261,5 +281,5 @@ class DBHelper {
         console.log(error);
       }); // end of dbPromise.then       
   } // end of manageOfflineReviews  
-
+*/
 }
