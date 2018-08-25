@@ -98,13 +98,13 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const hiddenField = document.getElementById('restaurant_id');
   hiddenField.setAttribute('value', restid);
 
+  // Below isn't called/read?
   const reviewForm = document.getElementById('reviewForm').addEventListener('submit', submitData);
 
   function submitData (event) {
 
       event.preventDefault();
 
-      // let restaurant_id = restid;
       let restaurant_id = document.getElementById('restaurant_id').value;
       let name = document.getElementById('name').value;
       let rating = document.getElementById('rating').value;
