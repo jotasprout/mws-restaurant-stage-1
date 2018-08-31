@@ -13,6 +13,7 @@ self.addEventListener('install', function(event) {
                 'js/restaurant_info.js',
                 'restaurant.html',
                 'css/styles.css',
+                'css/font-awesome.min.css',
                 'css/yucky.css'
             ]);
         })

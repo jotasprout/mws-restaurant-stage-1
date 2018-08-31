@@ -1,16 +1,12 @@
 let restaurant;
 var map;
 
-/**
- * Initialize map as soon as the page is loaded.
- */
+/* Initialize map as soon as the page is loaded. */
 document.addEventListener('DOMContentLoaded', (event) => {  
   initMap();
 });
 
-/**
- * Initialize leaflet map
- */
+/* Initialize leaflet map */
 initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
@@ -35,9 +31,7 @@ initMap = () => {
   });
 }  
 
-/**
- * Get current restaurant from page URL.
- */
+/* Get current restaurant from page URL. */
 fetchRestaurantFromURL = (callback) => {
   if (self.restaurant) { // restaurant already fetched!
     callback(null, self.restaurant)

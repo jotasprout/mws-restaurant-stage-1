@@ -198,22 +198,26 @@ class DBHelper {
       }).catch(function(error){
         console.log(error);
       }); // end of dbPromise.then  
-    
-    /*
-    dbPromise.then (function(db) {
-      var tx2 = db.transaction('review-outbox', 'readwrite');
-      var res2 = tx2.objectStore('review-outbox');
-      return res2.getAll();
-    }).then(function(outboxReviews) {
-      if (outboxReviews.length !==0){
-        // if length isn't zero ... something needs to send the reviews that are there
-        callback(null, outboxReviews);
-      } else {
-        // a fetch with put and options and stuff ... wait ... this should go under IF, correct?
-      }
-    });
-    */
+
   } // end of fetchReviews
+
+  static addNewReviewToOutbox (url, method, body) {
+
+    const idbPromise = idb.open('review-db');
+
+    idbPromise.then (db => {
+      const tx = db.transaction('review-outbox', 'readwrite');
+      tx.objectStore('review-outbox').put({
+        data: {
+          url, method, body
+        } // end of data
+      }) // end of put
+    }) // end of then
+  } // end of addNewReviewToOutbox  
+
+  static addNewReviewToIDB () {
+    // stuff goes here
+  }
 
   static fetchReviewsByRestaurant(restid, callback) {
     // console.log(restid);
