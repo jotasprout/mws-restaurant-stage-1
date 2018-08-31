@@ -158,9 +158,10 @@ class DBHelper {
       reviewStore.createIndex('by-restaurant', 'restaurant_id');
 
       const reviewOutbox = upgradeDb.createObjectStore('review-outbox', {
+        autoIncrement: true,
         keyPath: 'outboxID'
       });
-      reviewOutbox.createIndex('by-restaurant', 'restaurant_id');
+      // reviewOutbox.createIndex('by-restaurant', 'restaurant_id');
 
     });
 
@@ -200,24 +201,6 @@ class DBHelper {
       }); // end of dbPromise.then  
 
   } // end of fetchReviews
-
-  static addNewReviewToOutbox (url, method, body) {
-
-    const idbPromise = idb.open('review-db');
-
-    idbPromise.then (db => {
-      const tx = db.transaction('review-outbox', 'readwrite');
-      tx.objectStore('review-outbox').put({
-        data: {
-          url, method, body
-        } // end of data
-      }) // end of put
-    }) // end of then
-  } // end of addNewReviewToOutbox  
-
-  static addNewReviewToIDB () {
-    // stuff goes here
-  }
 
   static fetchReviewsByRestaurant(restid, callback) {
     // console.log(restid);

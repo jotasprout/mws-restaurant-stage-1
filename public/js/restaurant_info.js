@@ -92,40 +92,88 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const hiddenField = document.getElementById('restaurant_id');
   hiddenField.setAttribute('value', restid);
 
+  function addNewReviewToOutbox (reviewToSend) {
+    console.log("trying to put in pending:",reviewToSend);
+
+    const body = reviewToSend;
+    const method = 'POST';
+    const url = 'http://localhost:1337/reviews/';
+
+    const idbPromise = idb.open('review-db');
+
+    idbPromise.then (function(db) {
+      const tx = db.transaction('review-outbox', 'readwrite');
+      tx.objectStore('review-outbox').put({
+        data: {
+          url,
+          method,
+          body
+        } // end of data
+      }); // end of put
+    });
+  } // end of addNewReviewToOutbox  
+
+  function addNewReviewToIDB () {
+    // stuff goes here
+  }
+
   // Below isn't called/read?
-  const reviewForm = document.getElementById('reviewForm').addEventListener('submit', submitData);
+  const reviewForm = document.getElementById('reviewForm').addEventListener('submit', submitReview);  
 
-  function submitData (event) {
+  function submitReview (event) {
 
-      event.preventDefault();
+    event.preventDefault();
 
-      let restaurant_id = document.getElementById('restaurant_id').value;
-      let name = document.getElementById('name').value;
-      let rating = document.getElementById('rating').value;
-      let comments = document.getElementById('comments').value;
+    let restaurant_id = document.getElementById('restaurant_id').value;
+    let name = document.getElementById('name').value;
+    let rating = document.getElementById('rating').value;
+    let comments = document.getElementById('comments').value;
 
-      const reviewContent = {
-          restaurant_id,
-          name,
-          rating,
-          comments
-      };
+    const reviewContent = {
+        restaurant_id,
+        name,
+        rating,
+        comments
+    };    
+    console.log(reviewContent);
+   
+    addNewReviewToOutbox(reviewContent);
+    sendReviewToServer(reviewContent);
 
-      const reviewOptions = {
-          method: 'POST',
-          body: JSON.stringify(reviewContent),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-      };
+  }
 
-      const url = 'http://localhost:1337/reviews/';
+  function sendReviewToServer (reviewToSend) {
 
-      fetch(url, reviewOptions)
-      .then((res) => console.log(res.json()))
-      .catch((err) => console.log (err));
+    // event.preventDefault();
+    /*
+    let restaurant_id = document.getElementById('restaurant_id').value;
+    let name = document.getElementById('name').value;
+    let rating = document.getElementById('rating').value;
+    let comments = document.getElementById('comments').value;
 
-  }; // end of submitData
+    const reviewContent = {
+        restaurant_id,
+        name,
+        rating,
+        comments
+    };
+    */
+
+    const reviewOptions = {
+        method: 'POST',
+        body: JSON.stringify(reviewToSend),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    };
+
+    const url = 'http://localhost:1337/reviews/';
+
+    fetch(url, reviewOptions)
+    .then((res) => console.log(res.json()))
+    .catch((err) => console.log (err));
+
+  }; // end of sendReviewToServer
 
   // fetching reviews for this restaurant
   DBHelper.fetchReviewsByRestaurant(restid, (error, reviews) => {
