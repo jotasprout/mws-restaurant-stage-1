@@ -69,9 +69,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   console.log ("stateOfHeart on page load is " + stateOfHeart);
 
   if (stateOfHeart == false) {
-    heart.setAttribute('class', 'fas fa-heart whiteQueen');
+    heart.setAttribute('class', 'whiteQueen');
   } else {
-    heart.setAttribute('class', 'fas fa-heart redQueen');
+    heart.setAttribute('class', 'redQueen');
   }
 
   const address = document.getElementById('restaurant-address');
@@ -265,11 +265,11 @@ function changeOfHeart (restaurant) {
   if (stateOfHeart == false) {
     stateOfHeart = true;
     console.log ("stateOfHeart changed to " + stateOfHeart);
-    heart.setAttribute('class', 'fas fa-heart redQueen');
+    heart.setAttribute('class', 'redQueen');
   } else {
     stateOfHeart = false;
     console.log ("stateOfHeart changed to " + stateOfHeart);
-    heart.setAttribute('class', 'fas fa-heart whiteQueen');
+    heart.setAttribute('class', 'whiteQueen');
   }
   
   const furl = `http://localhost:1337/restaurants/${restid}/?is_favorite=${stateOfHeart}`;
