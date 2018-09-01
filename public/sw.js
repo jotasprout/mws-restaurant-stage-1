@@ -43,7 +43,6 @@ self.addEventListener('fetch', function(event) {
     );
 });
 
-
 function showImg(request) {
     let localImgName = request.url.replace(/-\d+px\.jpg$/, '');
 

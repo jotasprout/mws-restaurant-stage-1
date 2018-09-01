@@ -49,7 +49,6 @@ class DBHelper {
   } // end of fetchRestaurants
 
   /* Fetch a restaurant by its ID */
-
   static fetchRestaurantById(id, callback) {
     // fetch all restaurants with proper error handling.
     DBHelper.fetchRestaurants((error, restaurants) => {
@@ -161,7 +160,6 @@ class DBHelper {
         autoIncrement: true,
         keyPath: 'outboxID'
       });
-      // reviewOutbox.createIndex('by-restaurant', 'restaurant_id');
 
     });
 
@@ -182,7 +180,6 @@ class DBHelper {
         })
         .then(function(reviews) {
           // put reviews from server into local db
-
           dbPromise.then(function(db){
             var tx = db.transaction('review-store', 'readwrite');
             var res = tx.objectStore('review-store');
@@ -195,19 +192,13 @@ class DBHelper {
         });
       }
     }).then(function(){
-        // console.log("added reviews");
       }).catch(function(error){
         console.log(error);
       }); // end of dbPromise.then  
-
   } // end of fetchReviews
 
   static fetchReviewsByRestaurant(restid, callback) {
-    // console.log(restid);
-    // Fetch all reviews with proper error handling
     DBHelper.fetchReviews((error, reviews) => {
-      // console.log(reviews);
-      // the above works
       if (error) {
         callback(error, null);
       } else {

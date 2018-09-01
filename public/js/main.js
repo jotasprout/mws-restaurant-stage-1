@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       console.error(err);
     });
   }
-
 });
 
 /* Fetch all neighborhoods and set their HTML */
@@ -122,7 +121,6 @@ resetRestaurants = (restaurants) => {
   ul.innerHTML = '';
 
   // Remove all map markers
-  // self.markers.forEach(m => m.setMap(null));
   self.markers = [];
   self.restaurants = restaurants;
 }
@@ -131,7 +129,6 @@ resetRestaurants = (restaurants) => {
 const fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
   restaurants.forEach(restaurant => {
-    
     ul.append(createRestaurantHTML(restaurant));
   });
   addMarkersToMap();
@@ -170,7 +167,6 @@ const createRestaurantHTML = (restaurant) => {
 };
 
 /* Add markers for current restaurants to the map */
-
 addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
