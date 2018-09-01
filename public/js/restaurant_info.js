@@ -57,6 +57,7 @@ fetchRestaurantFromURL = (callback) => {
 }
 
 let stateOfHeart;
+
 /* Create restaurant HTML and add it to the webpage */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
@@ -92,132 +93,9 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const hiddenField = document.getElementById('restaurant_id');
   hiddenField.setAttribute('value', restid);
 
-  function addNewReviewToOutbox (reviewToSend) {
-    console.log("trying to put in pending:",reviewToSend);
 
-    const body = reviewToSend;
-    const method = 'POST';
-    const url = 'http://localhost:1337/reviews/';
 
-    const idbPromise = idb.open('review-db');
 
-    idbPromise.then (function(db) {
-      const tx = db.transaction('review-outbox', 'readwrite');
-      tx.objectStore('review-outbox').put({
-        data: {
-          url,
-          method,
-          body
-        } // end of data
-      }); // end of put
-    });
-  } // end of addNewReviewToOutbox  
-
-  function addNewReviewToIDB (reviewToSend) {
-    console.log("trying to put in local cache IDB");
-    const idbPromise = idb.open('review-db');
-    idbPromise.then(function(db) {
-      const tx = db.transaction('review-store', 'readwrite');
-      tx.objectStore('review-store').put({
-        id: Date.now(),
-        "restaurant_id": reviewToSend.restaurant_id,
-        data: reviewToSend
-      });
-    });
-  }
-
-  // Below isn't called/read?
-  const reviewForm = document.getElementById('reviewForm').addEventListener('submit', submitReview);  
-
-  function submitReview (event) {
-
-    event.preventDefault();
-
-    let restaurant_id = document.getElementById('restaurant_id').value;
-    let name = document.getElementById('name').value;
-    let rating = document.getElementById('rating').value;
-    let comments = document.getElementById('comments').value;
-
-    const reviewContent = {
-        restaurant_id,
-        name,
-        rating,
-        comments
-    };    
-    // console.log(reviewContent);
-   
-    addNewReviewToOutbox(reviewContent);
-    addNewReviewToIDB(reviewContent);
-    trySendingReviewToServer();
-
-  }
-
-  function sendReviewToServer (reviewToSend) {
-
-    const reviewOptions = {
-        method: 'POST',
-        body: JSON.stringify(reviewToSend),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-    };
-
-    const url = 'http://localhost:1337/reviews/';
-
-    fetch(url, reviewOptions)
-    .then((res) => console.log(res.json()))
-    .catch((err) => console.log (err));
-
-  }; // end of sendReviewToServer
-
-  function trySendingReviewToServer () {
-
-    const idbPromise = idb.open('review-db');
-
-    idbPromise.then (function(db) {
-      const tx = db.transaction('review-outbox', 'readwrite');
-      tx
-      .objectStore('review-outbox')
-      .openCursor()
-      .then (cursor => {
-        if(!cursor) {
-          return;
-        };
-        const value = cursor.value;
-        url = cursor.value.data.url;
-        method = cursor.value.data.method;
-        body = cursor.value.data.body;
-
-        const reviewOptions = {
-          method: 'POST',
-          body: JSON.stringify(body),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        };
-        fetch(url, reviewOptions)
-        .then(response => {
-          if (!response.ok){
-            console.log ("must be offline");
-            return;
-          } // end of if
-        }) // end of then number 2
-        .then(() => {
-          const deleteOutboxItemTX = db.transaction('review-outbox', 'readwrite');
-          deleteOutboxItemTX
-          .objectStore('review-outbox')
-          .openCursor()
-          .then(cursor => {
-            cursor
-            .delete()
-            .then(()=> {
-              callback();
-            }) // end of deleting cursor then
-          }) // end of open cursor then
-        }) // end of then number 3?
-      }) // end of then number 1
-    });
-  }
 
   // fetching reviews for this restaurant
   DBHelper.fetchReviewsByRestaurant(restid, (error, reviews) => {
@@ -372,4 +250,131 @@ function changeOfHeart (restaurant) {
 
   fetch (furl, faveOptions);
 
+}
+
+function addNewReviewToOutbox (reviewToSend) {
+  console.log("trying to put in pending:",reviewToSend);
+
+  const body = reviewToSend;
+  const method = 'POST';
+  const url = 'http://localhost:1337/reviews/';
+
+  const idbPromise = idb.open('review-db');
+
+  idbPromise.then (function(db) {
+    const tx = db.transaction('review-outbox', 'readwrite');
+    tx.objectStore('review-outbox').put({
+      data: {
+        url,
+        method,
+        body
+      } // end of data
+    }); // end of put
+  });
+} // end of addNewReviewToOutbox  
+
+function addNewReviewToIDB (reviewToSend) {
+  console.log("trying to put in local cache IDB");
+  const idbPromise = idb.open('review-db');
+  idbPromise.then(function(db) {
+    const tx = db.transaction('review-store', 'readwrite');
+    tx.objectStore('review-store').put({
+      id: Date.now(),
+      "restaurant_id": reviewToSend.restaurant_id,
+      data: reviewToSend
+    });
+  });
+}
+
+// Below isn't called/read?
+const reviewForm = document.getElementById('reviewForm').addEventListener('submit', submitReview);  
+
+function submitReview (event) {
+
+  event.preventDefault();
+
+  let restaurant_id = document.getElementById('restaurant_id').value;
+  let name = document.getElementById('name').value;
+  let rating = document.getElementById('rating').value;
+  let comments = document.getElementById('comments').value;
+
+  const reviewContent = {
+      restaurant_id,
+      name,
+      rating,
+      comments
+  };    
+  // console.log(reviewContent);
+  
+  addNewReviewToOutbox(reviewContent);
+  addNewReviewToIDB(reviewContent);
+  trySendingReviewToServer();
+
+}
+
+function sendReviewToServer (reviewToSend) {
+
+  const reviewOptions = {
+      method: 'POST',
+      body: JSON.stringify(reviewToSend),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+  };
+
+  const url = 'http://localhost:1337/reviews/';
+
+  fetch(url, reviewOptions)
+  .then((res) => console.log(res.json()))
+  .catch((err) => console.log (err));
+
+}; // end of sendReviewToServer
+
+function trySendingReviewToServer () {
+
+  const idbPromise = idb.open('review-db');
+
+  idbPromise.then (function(db) {
+    const tx = db.transaction('review-outbox', 'readwrite');
+    tx
+    .objectStore('review-outbox')
+    .openCursor()
+    .then (cursor => {
+      if(!cursor) {
+        return;
+      };
+      const value = cursor.value;
+      url = cursor.value.data.url;
+      method = cursor.value.data.method;
+      body = cursor.value.data.body;
+
+      const reviewOptions = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch(url, reviewOptions)
+      .then(response => {
+        if (!response.ok){
+          console.log ("must be offline");
+          return;
+        } // end of if
+      }) // end of then number 2
+      .then(() => {
+        const deleteOutboxItemTX = db.transaction('review-outbox', 'readwrite');
+        deleteOutboxItemTX
+        .objectStore('review-outbox')
+        .openCursor()
+        .then(cursor => {
+          cursor
+          .delete()
+          //.then(()=> {
+          //  callback();
+          //}) // end of deleting cursor then
+        }) // end of open cursor then
+      }) // end of then number 3?
+    }) // end of then number 1
+  });
 }
