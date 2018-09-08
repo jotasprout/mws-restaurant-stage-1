@@ -343,7 +343,8 @@ function trySendingReviewToServer () {
       if(!cursor) {
         return;
       };
-      const value = cursor.value;
+      // const value = cursor.value;
+      // I think above is redundant
       url = cursor.value.data.url;
       method = cursor.value.data.method;
       body = cursor.value.data.body;
@@ -358,11 +359,11 @@ function trySendingReviewToServer () {
       fetch(url, reviewOptions)
       .then(response => {
         if (!response.ok){
-          console.log ("must be offline");
+          console.log ("could not store on server");
           return;
         } // end of if
-      }) // end of then number 2
-      .then(() => {
+      // }) // end of then number 2
+      // .then(() => {
         const deleteOutboxItemTX = db.transaction('review-outbox', 'readwrite');
         deleteOutboxItemTX
         .objectStore('review-outbox')
